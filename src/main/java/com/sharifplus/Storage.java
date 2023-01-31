@@ -75,4 +75,15 @@ public class Storage {
             left[i] -= order.total[i];
         }
     }
+
+    public void listResources() {
+        for (int i=0;i<left.length;i++) {
+            if (left[i] == 0) {
+                System.out.println(IO.Yellow + ProductsList.MATERIALS[i] + IO.Red + left[i] + IO.Reset);
+            }
+            else {
+                System.out.println(IO.Yellow + ProductsList.MATERIALS[i] + IO.Green + left[i] + IO.Reset);
+            }
+        }
+    }
 }
