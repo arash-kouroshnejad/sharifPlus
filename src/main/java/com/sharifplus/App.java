@@ -9,6 +9,7 @@ public class App
 
     public static Scanner reader = new Scanner(System.in);
     public static HashMap <Long, User> users = new HashMap<>();
+    public static Storage storage = new Storage(null);
 
     public static void main( String[] args )
     {
