@@ -31,6 +31,8 @@ public class Order {
         }
     }
 
+    int[] total;
+
     public static Product[] allProducts;
 
     private void populateArray() {

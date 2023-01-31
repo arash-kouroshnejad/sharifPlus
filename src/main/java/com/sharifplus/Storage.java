@@ -1,7 +1,6 @@
 package com.sharifplus;
 
 import com.sharifplus.Products.ProductsList;
-import com.sharifplus.Products.Product;
 
 public class Storage {
     public int[] left = new int[ProductsList.MATERIALS.length];
@@ -55,6 +54,25 @@ public class Storage {
     }
 
     public boolean isAvailable(Order order) {
-        
+        int size = order.products.size();
+        int[] total = new int[left.length];
+        for (int i=0;i<size;i++) {
+            for (int j=0;j<left.length;j++) {
+                total[j] += order.products.get(i).ingredients[j];
+            }    
+        }
+        for (int i=0;i<left.length;i++) {
+            if (total[i] > left[i]) {
+                return false;
+            }
+        }
+        order.total = total;
+        return true;
+    }
+
+    public void allocate(Order order) {
+        for (int i=0;i<left.length;i++) {
+            left[i] -= order.total[i];
+        }
     }
 }
