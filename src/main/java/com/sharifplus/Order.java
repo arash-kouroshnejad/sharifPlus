@@ -9,9 +9,9 @@ import com.sharifplus.Products.Foods.*;
 import java.util.LinkedList;
 
 public class Order {
-    final long ID;
-    final User usr;
-    final LinkedList<Product> products;
+    public final long ID;
+    public final User usr;
+    public final LinkedList<Product> products;
 
     public Order(long ID, User usr, String order) {
         populateArray();

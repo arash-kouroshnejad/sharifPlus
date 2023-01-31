@@ -1,8 +1,8 @@
 package com.sharifplus.Products;
 
 public abstract class Product {
-    protected String TYPE;
-    protected String name;
+    public String TYPE;
+    public String name;
     public int[] ingredients;
 
     public void printIngredients() {

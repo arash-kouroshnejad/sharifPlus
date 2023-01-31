@@ -15,8 +15,8 @@ public abstract class User {
     public boolean isAdmin;
     public boolean isEmployee;
     public boolean isClient;
-    protected final String name;
-    protected final long userId;
+    public final String name;
+    public final long userId;
     protected final String pawrdHsh;
 
     public User(String passwrd, String name) throws java.security.NoSuchAlgorithmException {
