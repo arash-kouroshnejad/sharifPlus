@@ -22,8 +22,8 @@ public class Cafe extends Store{
         }
         System.out.format("+--------------------------+-----------------------------+\n");
     }
-    public void addOrder() {
-        Order order = new Order(usr.userId, usr, reader.nextLine());
+    public void addOrder(String input) {
+        Order order = new Order(usr.userId, usr, input);
         for (Product product : order.products) {
             outer :
             for (int i=0;i<arr.length;i++) {

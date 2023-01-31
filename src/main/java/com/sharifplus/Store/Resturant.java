@@ -1,9 +1,11 @@
 package com.sharifplus.Store;
 
 import com.sharifplus.*;
+import java.util.*;
 
 public class Resturant extends Store {
-    String Menu = "Burger Fried-Chicken Pizza Steak French-Fries Salad Salad";
+    String Menu = "Burger Fried-Chicken Pizza Steak French-Fries Salad";
+    Scanner reader = App.reader;
 
     public void getMenu() {
         String alignment = "|%-40s";
@@ -21,7 +23,7 @@ public class Resturant extends Store {
         System.out.format("+--------------------------+-----------------------------+\n");
     }
 
-    public void addOrder() {
+    public void addOrder(String input) {
 
     }
 }

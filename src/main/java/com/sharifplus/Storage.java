@@ -1,9 +1,11 @@
 package com.sharifplus;
 
 import com.sharifplus.Products.*;
+import java.util.Scanner;
 
 public class Storage {
     int[] left = new int[ProductsList.MATERIALS.length];
+    Scanner reader = App.reader;
 
     public Storage(int[] input) {
         // POPULATE THE left ARRAY
@@ -12,7 +14,7 @@ public class Storage {
     public void updateAll(int x) {
         for (int i = 0; i < left.length; i++) {
             if (left[i] + x < 0) {
-                System.out.println("Negative Left From " + ProductsList.MATERIALS[i]);
+                System.out.println("Negative Left From " + IO.Red + ProductsList.MATERIALS[i] + IO.Reset);
                 return;
             }
         }
@@ -25,7 +27,7 @@ public class Storage {
         String[] parsedProducts = products.split(" ");
         String[] parsedChange = change.split(" ");
         if (parsedChange.length != parsedProducts.length) {
-            System.out.println(" Invalid Input !");
+            System.out.println(IO.Red + " Invalid Input !" + IO.Reset);
             return;
         }
         int[] positions = new int[parsedProducts.length];
@@ -34,7 +36,7 @@ public class Storage {
             try {
                 changes[i] = Integer.parseInt(parsedChange[i]);
             } catch (NumberFormatException e) {
-                System.out.println(" Invalid Number ! (Must Be An Integer");
+                System.out.println(IO.Red + " Invalid Number ! (Must Be An Integer" + IO.Reset);
                 return;
             }
             outer: for (int j = 0; j < left.length; j++) {
@@ -92,5 +94,38 @@ public class Storage {
             }
         }
         return true;
+    }
+
+    public void handle() {
+        String input;
+        while (true) {
+            input = reader.nextLine();
+            switch(input) {
+                case "List Pending" :
+                    Order.list(false);
+                    break;
+                case "List All" :
+                    Order.list(true);
+                    break;
+                case "Query Storage" :
+                    queryWareHouse();
+                    break;
+                case "Prepare Order"
+            }
+        }
+    }
+
+    public void queryWareHouse() {
+        for (int i=0;i<left.length;i++){
+            if (left[i] > 10) {
+                System.out.println(IO.Green + ProductsList.MATERIALS[i] + " : " + left[i] + IO.Reset);
+            }
+            else if (left [i] > 0) {
+                System.out.println(IO.Yellow + ProductsList.MATERIALS[i] + " : " + left[i] + IO.Reset);
+            }
+            else {
+                System.out.println(IO.Red + ProductsList.MATERIALS[i] + " : " + left[i] + IO.Reset);
+            }
+        }
     }
 }

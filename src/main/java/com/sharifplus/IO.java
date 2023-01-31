@@ -9,7 +9,8 @@ import java.security.NoSuchAlgorithmException;
 public class IO {
     Scanner reader = App.reader;
     String input;
-    Resturant resturant = new Resturant();
+    Resturant resturant = App.resturant;
+    Cafe cafe = App.cafe;
     Boolean isLogged = User.isLogged;
     User usr = User.currentUsr;
 
@@ -31,15 +32,34 @@ public class IO {
             }
             else {
                 if (usr.isClient) {
-                    System.out.println("Available Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n");
+                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n" + IO.Red +  "\t-Log Out" + IO.Reset);
                     input = reader.nextLine();
                     switch(input) {
+                        case "Log Out" :
+                            User.logOut();
+                            break;
                         case "Resturant" :
-
+                            resturant.Handle();
+                            break;
+                        case "Cafe" :
+                            cafe.Handle();
+                            break;
+                        default :
+                            System.out.println(IO.Red + "Invalid Command !");
                     }
                 }
                 else if (usr.isEmployee) {
-                    
+                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red +  "\t-Log Out" + IO.Reset);
+                    input = reader.nextLine();
+                    switch(input) {
+                        case "Storage" :
+
+                        case "Log Out" :
+                            User.logOut();
+                            break;
+                        default :
+                            System.out.println(IO.Red + "Invalid Command !" + IO.Reset);
+                    }
                 }
             }
         }
