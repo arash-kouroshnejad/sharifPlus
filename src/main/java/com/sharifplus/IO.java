@@ -1,23 +1,54 @@
 package com.sharifplus;
 
+import java.io.PrintWriter;
 import java.util.Scanner;
-import com.sharifplus.Store.*;;
+import com.sharifplus.Store.*;
+import com.sharifplus.Authentication.User;
+import java.security.NoSuchAlgorithmException;
 
 public class IO {
-    Scanner reader = new Scanner(System.in);
+    Scanner reader = App.reader;
     String input;
     Resturant resturant = new Resturant();
+    Boolean isLogged = User.isLogged;
+    User usr = User.currentUsr;
 
-    public IO() {
+    public IO() throws NoSuchAlgorithmException {
         while (true) {
-           switch (input.split(" ")[0]) {
-            case "ADD" :
-              new Order(0, null, null, input);
-            case "GET" :
-                resturant.getMenu();
-            case ""
-           } 
+            if (!isLogged) {
+                System.out.println("Available Commands : \n" + IO.Yellow + "\t -Create Account\n" + "\t -Log In" + IO.Reset);
+                input = reader.nextLine();
+                switch(input) {
+                    case "Create Account" :
+                        User.createUsr();
+                        break;
+                    case "Log In":
+                        User.logIn();
+                        break;
+                    default :
+                        System.out.println(IO.Red + "Invalid Command !" + IO.Reset);
+                }
+            }
+            else {
+                if (usr.isClient) {
+                    System.out.println("Available Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n");
+                    input = reader.nextLine();
+                    switch(input) {
+                        case "Resturant" :
+
+                    }
+                }
+                else if (usr.isEmployee) {
+                    
+                }
+            }
         }
+    }
+
+    public static void PrintCheckMark() {
+        PrintWriter writer = new PrintWriter(System.out, true);
+        char check = '\u2705';
+        writer.print(check);
     }
 
     public static final String Black = "\u001b[30m";
