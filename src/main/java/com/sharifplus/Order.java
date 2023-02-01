@@ -53,14 +53,24 @@ public class Order {
         return null;
     }
 
-    public boolean isComplete() {return isComplete;}
-    public void Terminate() {isComplete = true;}
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    public void Terminate() {
+        isComplete = true;
+    }
 
     public static void list(boolean all) {
-        LinkedList <Order> queue = new LinkedList<>();
+        LinkedList<Order> queue = new LinkedList<>();
         for (Order order : queue) {
             if (all || order.isComplete()) {
-                System.out.println("Order No: " + IO.Yellow + order.ID + IO.Reset + "Created By User Id : " + IO.Blue + order.usr.userId + IO.Reset);
+                System.out
+                        .println("Order No: " + IO.Yellow + order.ID + IO.Reset + "Created By User Id : " + IO.Blue
+                                + order.usr.userId
+                                + ((!all) ? IO.Yellow + " (pending) "
+                                        : ((order.isComplete) ? IO.Green + "Terminated" : IO.Yellow + "Pending"))
+                                + IO.Reset);
                 System.out.print("[");
                 for (Product product : order.products) {
                     System.out.print(" " + IO.Green + product.name + IO.Reset + ",");

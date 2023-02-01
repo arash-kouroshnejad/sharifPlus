@@ -29,7 +29,7 @@ public class IO {
                         User.logIn();
                         break;
                     default:
-                        System.out.println(IO.Red + "Invalid Command !" + IO.Reset);
+                        printError("Invalid Command !");
                 }
             } else {
                 if (usr.isClient) {
@@ -47,7 +47,7 @@ public class IO {
                             cafe.Handle();
                             break;
                         default:
-                            System.out.println(IO.Red + "Invalid Command !");
+                            printError("Invalid Command !");
                     }
                 } else if (usr.isEmployee) {
                     System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red + "\t-Log Out"
@@ -61,7 +61,7 @@ public class IO {
                             User.logOut();
                             break;
                         default:
-                            System.out.println(IO.Red + "Invalid Command !" + IO.Reset);
+                            printError("Invalid Command !");
                     }
                 }
             }

@@ -101,7 +101,7 @@ public class Storage {
         while (true) {
             System.out.println("Available Commands : \n" + IO.Yellow
                     + "\t -List Pending \t -List All\n"
-                    + "\t -Query Ware House \t -Update All\n"
+                    + "\t -Query Ware House \t -Update All change (must be typed with +-)\n"
                     + "\t -Update product1 Product2 ... change1 change2 ... (must be typed with +-)\n"
                     + "\t -Prepare Order OrderID \t -Cancel Order OrderID\n" 
                     + "\t -Chceck Order OrderID \t -Back");
