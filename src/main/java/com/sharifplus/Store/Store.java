@@ -24,7 +24,7 @@ public abstract class Store {
     public void Handle() {
         String input;
         while (true) {
-            System.out.println("Available Commands : " + IO.Yellow +"\n \t -Get Menu" + "\n \t -Add Order" + IO.Magenta + "Product0 Product1 ..." + IO.Yellow + "\n \t Back" + IO.Reset);
+            System.out.println("Available Commands : " + IO.Yellow +"\n \t -Get Menu" + "\n \t -Add Order " + IO.Magenta + "Product0 Product1 ..." + IO.Yellow + "\n \t -Back" + IO.Reset);
             input = reader.nextLine();
             int length = input.length();
             if (input.equals("Get Menu")) {

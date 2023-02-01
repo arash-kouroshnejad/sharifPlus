@@ -1,4 +1,5 @@
 package com.sharifplus.Authentication;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -10,35 +11,36 @@ import java.util.Scanner;
 
 public abstract class User {
     static HashMap<Long, User> allUsers = App.users;
-    public static Boolean isLogged;
+    private static boolean isLogged = false;
     public static User currentUsr;
     public boolean isAdmin;
     public boolean isEmployee;
     public boolean isClient;
     public final String name;
     public final long userId;
-    protected final String pawrdHsh;
+    protected final byte[] pawrdHsh;
 
     public User(String passwrd, String name) throws java.security.NoSuchAlgorithmException {
-        userId = (long) Math.floor(Math.random()*Math.pow(10, 5));
+        userId = (long) Math.floor(Math.random() * Math.pow(10, 5));
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(passwrd.getBytes());
-        pawrdHsh = md.digest().toString();
+        pawrdHsh = md.digest();
         md.reset();
         this.name = name;
     }
 
-    public static void createUsr() throws NoSuchAlgorithmException{
+    public static void createUsr() throws NoSuchAlgorithmException {
         Scanner reader = App.reader;
         System.out.print("Enter Username : ");
         String userName = getUsername(reader);
-        System.out.print(IO.Green + " Succesful!\n" + IO.Reset + " Enter Password : ");
+        System.out.print(IO.Green + "Succesful!\n" + IO.Reset + " Enter Password : ");
         String passwrd = getPassword(reader);
         System.out.println(IO.Green + "Succesful \n");
         User usr = new Client(passwrd, userName);
         allUsers.put(usr.userId, usr);
         IO.PrintCheckMark();
-        System.out.println(IO.Green + "Succesful... User " + IO.Blue + userName + IO.Reset +" Created At " + java.time.LocalDateTime.now());
+        System.out.println(IO.Green + "Succesful... User " + IO.Blue + userName + IO.Reset + " Created At "
+                + java.time.LocalDateTime.now());
     }
 
     private static String getUsername(Scanner reader) {
@@ -64,15 +66,15 @@ public abstract class User {
             getPassword(reader);
         }
         String output = "";
-        for (int i=0;i<password.length;i++) {
+        for (int i = 0; i < password.length; i++) {
             output += password[i];
         }
         return output;
     }
 
-    public static void logIn() throws NoSuchAlgorithmException{
+    public static void logIn() throws NoSuchAlgorithmException {
         Scanner reader = App.reader;
-        System.out.print(" Enter Username : (or enter " + IO.Red + "cancel" + IO.Reset + " to exit)\n \t");
+        System.out.print("Enter Username : (or enter " + IO.Red + "cancel" + IO.Reset + " to exit)\n \t");
         String name = reader.nextLine();
         if (name.equals("cancel")) {
             return;
@@ -83,27 +85,24 @@ public abstract class User {
         }
         for (User usr : allUsers.values()) {
             if (usr.name.equals(name)) {
-                System.out.println(" Enter Password : ");
+                System.out.println("Enter Password : ");
                 String passwrd = getPassword(reader);
                 MessageDigest md = MessageDigest.getInstance("SHA-256");
                 md.update(passwrd.getBytes());
-                if (md.digest().toString().equals(usr.pawrdHsh)) {
-                    System.out.println(IO.Green + "  Logged In As " + IO.Blue + usr.name + IO.Reset );
+                if (usr.compareHashes(md.digest())) {
+                    System.out.println(IO.Green + "  Logged In As " + IO.Blue + usr.name + IO.Reset);
                     if (usr.isAdmin) {
                         System.out.println("Acoount Mode : " + IO.Magenta + "Admin" + IO.Reset);
-                    }
-                    if (usr.isClient) {
+                    } else if (usr.isClient) {
                         System.out.println("Account Mode : " + IO.White + "Client" + IO.Reset);
-                    }
-                    else {
+                    } else if (usr.isEmployee) {
                         System.out.println("Account Mode : " + IO.Yellow + "Employee" + IO.Reset);
                     }
                     isLogged = true;
                     currentUsr = usr;
                     return;
-                }
-                else {                    
-                    System.out.println(IO.Red + " Wrong Passwrord !" +IO.Reset);
+                } else {
+                    System.out.println(IO.Red + " Wrong Passwrord !" + IO.Reset);
                     return;
                 }
             }
@@ -115,5 +114,21 @@ public abstract class User {
         System.out.println(IO.Cyan + "Logged Out" + IO.Reset);
         currentUsr = null;
         isLogged = false;
+    }
+
+    private boolean compareHashes(byte[] hash) {
+        if (hash.length != pawrdHsh.length) {
+            return false;
+        }
+        for (int i = 0; i < hash.length; i++) {
+            if (hash[i] != pawrdHsh[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isLogged() {
+        return isLogged;
     }
 }

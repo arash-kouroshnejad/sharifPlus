@@ -15,7 +15,6 @@ public class Order {
     private boolean isComplete;
 
     public Order(long ID, User usr, String order) {
-        populateArray();
         this.ID = ID;
         this.usr = usr;
         products = new LinkedList<>();
@@ -28,20 +27,16 @@ public class Order {
         for (int i = 2; i < parsed.length; i++) {
             Product product = find(parsed[i]);
             products.add(product);
-            populateArray();
         }
     }
 
     int[] total;
 
-    public static Product[] allProducts;
+    public static Product[] allProducts = { new Pizza(), new Burger(), new Steak(), new FriedChicken(),
+        new Coffea(), new HotChocolate(), new Soda(), new Tea(), new Water(), new ChocolateCake(),
+        new IceCream(),
+        new VanillaCake(), new Salad(), new FrenchFries() };
 
-    private void populateArray() {
-        allProducts = new Product[] { new Pizza(), new Burger(), new Steak(), new FriedChicken(),
-                new Coffea(), new HotChocolate(), new Soda(), new Tea(), new Water(), new ChocolateCake(),
-                new IceCream(),
-                new VanillaCake(), new Salad(), new FrenchFries() };
-    }
 
     public static Product find(String input) {
         Product tmp;

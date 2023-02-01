@@ -7,17 +7,15 @@ import com.sharifplus.Authentication.User;
 import java.security.NoSuchAlgorithmException;
 
 public class IO {
-    Scanner reader = App.reader;
-    String input;
-    Resturant resturant = App.resturant;
-    Cafe cafe = App.cafe;
-    Boolean isLogged = User.isLogged;
-    User usr = User.currentUsr;
-    Storage storage = App.storage;
 
     public IO() throws NoSuchAlgorithmException {
+        Scanner reader = App.reader;
+        String input;
+        Resturant resturant = App.resturant;
+        Cafe cafe = App.cafe;
+        Storage storage = App.storage;
         while (true) {
-            if (!isLogged) {
+            if (!User.isLogged()) {
                 System.out.println(
                         "Available Commands : \n" + IO.Yellow + "\t -Create Account\n" + "\t -Log In" + IO.Reset);
                 input = reader.nextLine();
@@ -32,9 +30,10 @@ public class IO {
                         printError("Invalid Command !");
                 }
             } else {
-                if (usr.isClient) {
+                User usr = User.currentUsr;
+                if (usr.isAdmin || usr.isClient) {
                     System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n"
-                            + IO.Red + "\t-Log Out" + IO.Reset);
+                            + IO.Red + "\t -Log Out" + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {
                         case "Log Out":
@@ -70,7 +69,7 @@ public class IO {
 
     public static void PrintCheckMark() {
         PrintWriter writer = new PrintWriter(System.out, true);
-        char check = '\u2705';
+        char check = '\u2713';
         writer.print(check);
     }
 
@@ -97,5 +96,5 @@ public class IO {
     public static final String Magenta = "\u001b[35m";
     public static final String Cyan = "\u001b[36m";
     public static final String White = "\u001b[37m";
-    public static final String Reset = "\\033[0m";
+    public static final String Reset = "\033[0m";
 }
