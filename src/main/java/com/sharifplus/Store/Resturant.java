@@ -4,8 +4,11 @@ import com.sharifplus.*;
 import java.util.*;
 
 public class Resturant extends Store {
-    String Menu = "Burger Fried-Chicken Pizza Steak French-Fries Salad";
     Scanner reader = App.reader;
+
+    public Resturant () {
+        super("Burger Fried-Chicken Pizza Steak French-Fries Salad");
+    }
 
     public void getMenu() {
         String alignment = "|%-40s";

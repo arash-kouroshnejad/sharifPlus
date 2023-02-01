@@ -17,47 +17,48 @@ public class IO {
     public IO() throws NoSuchAlgorithmException {
         while (true) {
             if (!isLogged) {
-                System.out.println("Available Commands : \n" + IO.Yellow + "\t -Create Account\n" + "\t -Log In" + IO.Reset);
+                System.out.println(
+                        "Available Commands : \n" + IO.Yellow + "\t -Create Account\n" + "\t -Log In" + IO.Reset);
                 input = reader.nextLine();
-                switch(input) {
-                    case "Create Account" :
+                switch (input) {
+                    case "Create Account":
                         User.createUsr();
                         break;
                     case "Log In":
                         User.logIn();
                         break;
-                    default :
+                    default:
                         System.out.println(IO.Red + "Invalid Command !" + IO.Reset);
                 }
-            }
-            else {
+            } else {
                 if (usr.isClient) {
-                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n" + IO.Red +  "\t-Log Out" + IO.Reset);
+                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n"
+                            + IO.Red + "\t-Log Out" + IO.Reset);
                     input = reader.nextLine();
-                    switch(input) {
-                        case "Log Out" :
+                    switch (input) {
+                        case "Log Out":
                             User.logOut();
                             break;
-                        case "Resturant" :
+                        case "Resturant":
                             resturant.Handle();
                             break;
-                        case "Cafe" :
+                        case "Cafe":
                             cafe.Handle();
                             break;
-                        default :
+                        default:
                             System.out.println(IO.Red + "Invalid Command !");
                     }
-                }
-                else if (usr.isEmployee) {
-                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red +  "\t-Log Out" + IO.Reset);
+                } else if (usr.isEmployee) {
+                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red + "\t-Log Out"
+                            + IO.Reset);
                     input = reader.nextLine();
-                    switch(input) {
-                        case "Storage" :
+                    switch (input) {
+                        case "Storage":
 
-                        case "Log Out" :
+                        case "Log Out":
                             User.logOut();
                             break;
-                        default :
+                        default:
                             System.out.println(IO.Red + "Invalid Command !" + IO.Reset);
                     }
                 }
@@ -69,6 +70,17 @@ public class IO {
         PrintWriter writer = new PrintWriter(System.out, true);
         char check = '\u2705';
         writer.print(check);
+    }
+
+    public static boolean isDigit(char c) {
+        if (c == 45) {
+            return true;
+        } else if (c < 58 && c > 47) {
+            return true;
+        } else if (c == 43) {
+            return true;
+        }
+        return false;
     }
 
     public static final String Black = "\u001b[30m";

@@ -87,7 +87,7 @@ public class Storage {
         }
     }
 
-    public  boolean isAvailable(Product product) {
+    public boolean isAvailable(Product product) {
         for (int i = 0; i < left.length; i++) {
             if (product.ingredients[i] > left[i]) {
                 return false;
@@ -100,32 +100,87 @@ public class Storage {
         String input;
         while (true) {
             input = reader.nextLine();
-            switch(input) {
-                case "List Pending" :
-                    Order.list(false);
-                    break;
-                case "List All" :
-                    Order.list(true);
-                    break;
-                case "Query Storage" :
-                    queryWareHouse();
-                    break;
-                case "Prepare Order"
+            if (input.substring(0, 12).equals("List Pending")) {
+                Order.list(false);
+            } else if (input.substring(0, 8).equals("List All")) {
+                Order.list(true);
+            } else if (input.substring(0, 16).equals("Query Ware House")) {
+                queryWareHouse();
+            } else if (input.substring(0, 13).equals("Prepare Order")) {
+                Order tmp;
+                if ((tmp = getOrder(Integer.parseInt(input.split(" ")[2]))) != null) {
+                    if (isAvailable(tmp)) {
+                        allocate(tmp);
+                        IO.PrintCheckMark();
+                        System.out.println(
+                                IO.Green + "Order No:" + IO.Blue + tmp.ID + IO.Green + "Has Been Served" + IO.Reset);
+                    } else {
+                        System.out.println(IO.Red + "Uh Uh unavailable :(" + IO.Reset);
+                    }
+                } else {
+                    System.out.println(IO.Red + "Invalid Order Id" + IO.Reset);
+                }
+            } else if (input.substring(0, 10).equals("Update All")) {
+                try {
+                    updateAll(Integer.parseInt(input.split(" ")[2]));
+                } catch (NumberFormatException e) {
+                    System.out.println(IO.Red + "Invalid Input !" + IO.Reset);
+                }
+            } else if (input.substring(0, 7).equals("Update ") && !input.substring(7, 10).equals("All")) {
+                try {
+                    int i = 11;
+                    while (!IO.isDigit(input.charAt(i))) {
+                        i++;
+                    }
+                    update(input.substring(11, i - 1), input.substring(i - 1));
+                } catch (NumberFormatException e) {
+                    System.out.println(IO.Red + "Invalid Input !" + IO.Reset);
+                }
+            } else if (input.equals("History")) {
+
+            } else if (input.substring(0, 5).equals("Check")) {
+                try {
+                    int orderNo = Integer.parseInt(input.substring(12));
+                    Order ordr = getOrder(orderNo);
+                    if (ordr == null) {
+                        continue;
+                    } else if (isAvailable(ordr)) {
+                        System.out.println(IO.Green + "Order No :" + IO.Cyan + orderNo + "Is Available" + IO.Reset);
+                    } else {
+                        System.out.println(IO.Red + "Uh Uh unavailable :(" + IO.Reset);
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(IO.Red + "Invalid Input !" + IO.Reset);
+                }
+            }
+            else if (input.equals("Back")) {
+                return;
+            }
+            else {
+                System.out.println(IO.Red + "Invalid Command !" +IO.Reset);
             }
         }
     }
 
     public void queryWareHouse() {
-        for (int i=0;i<left.length;i++){
+        for (int i = 0; i < left.length; i++) {
             if (left[i] > 10) {
                 System.out.println(IO.Green + ProductsList.MATERIALS[i] + " : " + left[i] + IO.Reset);
-            }
-            else if (left [i] > 0) {
+            } else if (left[i] > 0) {
                 System.out.println(IO.Yellow + ProductsList.MATERIALS[i] + " : " + left[i] + IO.Reset);
-            }
-            else {
+            } else {
                 System.out.println(IO.Red + ProductsList.MATERIALS[i] + " : " + left[i] + IO.Reset);
             }
         }
+    }
+
+    public Order getOrder(int orderId) {
+        for (Order order : App.stack) {
+            if (order.ID == orderId) {
+                return order;
+            }
+        }
+        System.out.println(IO.Red + "Invalid Order Number !" + orderId + IO.Reset);
+        return null;
     }
 }
