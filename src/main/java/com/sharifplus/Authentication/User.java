@@ -3,10 +3,10 @@ package com.sharifplus.Authentication;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import com.sharifplus.App;
-import com.sharifplus.IO;
+import com.sharifplus.*;
 import java.io.Console;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public abstract class User {
@@ -19,6 +19,7 @@ public abstract class User {
     public final String name;
     public final long userId;
     protected final byte[] pawrdHsh;
+    public LinkedList<Order> OrderHistory = new LinkedList<>();
 
     public User(String passwrd, String name) throws java.security.NoSuchAlgorithmException {
         userId = (long) Math.floor(Math.random() * Math.pow(10, 5));
@@ -38,17 +39,18 @@ public abstract class User {
         IO.PrintCheckMark();
         System.out.println(IO.Green + "Succesful... User " + IO.Blue + userName + IO.Reset + " Created At "
                 + java.time.LocalDateTime.now());
+        IO.logInfo("A New Account Has Been Created");
     }
 
     private static String getUsername(Scanner reader) {
         String output = reader.nextLine();
         if (output.length() == 0) {
-            System.out.print(IO.Red + " Does Not Meet Minimum Length! Enter Another : " + IO.Reset);
+            IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Does Not Meet Minimum Length! Enter Another : ");
             getUsername(reader);
         }
         for (User usr : allUsers.values()) {
             if (usr.name.equals(output)) {
-                System.out.print(IO.Red + "Username Already Exist ! Pick Another : " + IO.Reset);
+                IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Username Already Exist ! Pick Another : ");
                 getUsername(reader);
             }
         }
@@ -59,7 +61,7 @@ public abstract class User {
         Console console = System.console();
         char[] password = console.readPassword();
         if (password.length == 0) {
-            System.out.print(IO.Red + " Invalid Length ! Pick Another : " + IO.Reset);
+            IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Invalid Length ! Pick Another : ");
             getPassword(reader);
         }
         String output = "";
@@ -77,7 +79,7 @@ public abstract class User {
             return;
         }
         if (name.length() == 0) {
-            System.out.println(IO.Red + " Invalid Length !" + IO.Reset);
+            IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Invalid Length !");
             logIn();
         }
         for (User usr : allUsers.values()) {
@@ -86,18 +88,19 @@ public abstract class User {
                 String passwrd = getPassword(reader);
                 if (usr.compareHashes(hash(passwrd))) {
                     System.out.println(IO.Green + "  Logged In As " + IO.Blue + usr.name + IO.Reset);
+                    IO.logInfo("Login By : ");
                     if (usr.isAdmin) {
-                        System.out.println("Acoount Mode : " + IO.Magenta + "Admin" + IO.Reset);
+                        System.out.println("Acoount Mode : " + usr.getPrivilage());
                     } else if (usr.isClient) {
-                        System.out.println("Account Mode : " + IO.White + "Client" + IO.Reset);
+                        System.out.println("Account Mode : " + usr.getPrivilage());
                     } else if (usr.isEmployee) {
-                        System.out.println("Account Mode : " + IO.Yellow + "Employee" + IO.Reset);
+                        System.out.println("Account Mode : " + usr.getPrivilage());
                     }
                     isLogged = true;
                     currentUsr = usr;
                     return;
                 } else {
-                    System.out.println(IO.Red + " Wrong Passwrord !" + IO.Reset);
+                    IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Wrong Passwrord !");
                     return;
                 }
             }
@@ -107,6 +110,7 @@ public abstract class User {
 
     public static void logOut() {
         System.out.println(IO.Cyan + "Logged Out" + IO.Reset);
+        IO.logInfo("Logout By : ");
         currentUsr = null;
         isLogged = false;
     }
@@ -140,16 +144,19 @@ public abstract class User {
                     isAdmin = true;
                     isClient = false;
                     isEmployee = false;
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Magenta + "Admin");
                     break;
                 case "Employee":
                     isAdmin = false;
                     isClient = false;
                     isEmployee = true;
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Yellow + "Employee");
                     break;
                 case "Client":
                     isAdmin = false;
                     isClient = true;
                     isEmployee = false;
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Green + "Client");
                     break;
                 default:
                     IO.printError("Invalid Access Level !");
@@ -164,5 +171,20 @@ public abstract class User {
         byte[] output = md.digest();
         md.reset();
         return output;
+    }
+
+    public void printOrderHistory() {
+        Order.list(true, currentUsr);
+        IO.logInfo("Purchase Hisotry Generated For : ");
+    }
+
+    public String getPrivilage() {
+        if (isAdmin) {
+            return IO.Magenta + "Admin" + IO.Reset;
+        } else if (isEmployee) {
+            return IO.Yellow + "Employee" + IO.Reset;
+        } else {
+            return IO.Green + "Client" + IO.Reset;
+        }
     }
 }

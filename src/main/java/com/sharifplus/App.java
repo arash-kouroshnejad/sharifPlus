@@ -27,7 +27,6 @@ public class App
         users.put(Employee.userId, Employee);
         User Client = new Client("a", "client");
         users.put(Client.userId, Client);
-        IO logic = new IO();
-        System.out.println( "Hello World!" );
+        IO.handle();
     }
 }

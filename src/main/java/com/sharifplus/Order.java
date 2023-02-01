@@ -38,10 +38,9 @@ public class Order {
     int[] total;
 
     public static Product[] allProducts = { new Pizza(), new Burger(), new Steak(), new FriedChicken(),
-        new Coffea(), new HotChocolate(), new Soda(), new Tea(), new Water(), new ChocolateCake(),
-        new IceCream(),
-        new VanillaCake(), new Salad(), new FrenchFries() };
-
+            new Coffea(), new HotChocolate(), new Soda(), new Tea(), new Water(), new ChocolateCake(),
+            new IceCream(),
+            new VanillaCake(), new Salad(), new FrenchFries() };
 
     public static Product find(String input) {
         Product tmp;
@@ -61,22 +60,30 @@ public class Order {
         isComplete = true;
     }
 
-    public static void list(boolean all) {
+    public static void list(boolean all, User usr) {
         LinkedList<Order> queue = App.stack;
+        boolean filtered = (usr != null);
         for (Order order : queue) {
-            if (all || !order.isComplete()) {
+            if ((all || !order.isComplete()) && ((filtered) ? order.usr.userId == usr.userId : true)) {
                 System.out
-                        .println("Order No: " + IO.Yellow + order.ID + IO.Reset + " Created By User Id : " + IO.Blue
-                                + order.usr.userId
+                        .println("Order No: " + IO.Yellow + order.ID + IO.Reset
+                                + ((filtered) ? " Created By User Id : " + IO.Blue
+                                        + order.usr.userId : "")
                                 + ((!all) ? IO.Yellow + " (pending) "
                                         : ((order.isComplete) ? IO.Green + "Terminated" : IO.Yellow + " Pending"))
                                 + IO.Reset);
-                System.out.print("[");
-                for (Product product : order.products) {
-                    System.out.print(" " + IO.Green + product.name + IO.Reset + ",");
-                }
-                System.out.println("]");
+                System.out.println(printOrder(order));
             }
         }
+    }
+
+    public static String printOrder(Order order) {
+        String output = "";
+        output += "[";
+        for (Product product : order.products) {
+            output += " " + IO.Green + product.name + IO.Reset + ",";
+        }
+        output += "]";
+        return output;
     }
 }

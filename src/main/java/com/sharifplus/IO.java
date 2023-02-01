@@ -1,14 +1,15 @@
 package com.sharifplus;
 
-import java.io.PrintWriter;
 import java.util.Scanner;
 import com.sharifplus.Store.*;
 import com.sharifplus.Authentication.User;
+
+import java.io.FileWriter;
 import java.security.NoSuchAlgorithmException;
 
 public class IO {
 
-    public IO() throws NoSuchAlgorithmException {
+    public static void handle() throws NoSuchAlgorithmException {
         Scanner reader = App.reader;
         String input;
         Resturant resturant = App.resturant;
@@ -35,7 +36,7 @@ public class IO {
                 User usr = User.currentUsr;
                 if (usr.isAdmin || usr.isClient) {
                     System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n"
-                            + IO.Red + "\t -Log Out\n" + "\t -Escalate Privilages\n" + "\t -Exit" + IO.Reset);
+                            + IO.Red + "\t -Log Out\n" + "\t -Escalate Privilages\n" + "\t -Order History\n" + "\t -Exit" + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {
                         case "Log Out":
@@ -49,6 +50,9 @@ public class IO {
                             break;
                         case "Escalate Privilages":
                             usr.setPrivilages();
+                            break;
+                        case "Order History" :
+                            usr.printOrderHistory();
                             break;
                         case "Exit" :
                             System.exit(0);
@@ -77,9 +81,7 @@ public class IO {
     }
 
     public static void PrintCheckMark() {
-        PrintWriter writer = new PrintWriter(System.out, true);
-        char check = '\u2713';
-        writer.print(check);
+        System.out.print(IO.Green + "✓" + IO.Reset);
     }
 
     public static boolean isDigit(char c) {
@@ -95,6 +97,23 @@ public class IO {
 
     public static void printError(String errMsg) {
         System.out.println(IO.Red + errMsg + IO.Reset);
+        log(Logging.formatError(errMsg), "../../../../logs/errors.log");
+    }
+
+    public static void logInfo(String input) {
+        log(input, "../../../../logs/info.log");
+    }
+
+    public static void log(String input, String fileName)  {
+        try {
+            FileWriter writer = new FileWriter(fileName, true);
+            writer.write(input);
+            writer.close();
+        }
+        catch (Exception e) {
+            System.out.println(IO.Red + "Fatal Error Occured During Loggin" + IO.Reset);
+            System.exit(1);
+        }
     }
 
     public static final String Black = "\u001b[30m";
