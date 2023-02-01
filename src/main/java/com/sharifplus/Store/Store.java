@@ -26,18 +26,18 @@ public abstract class Store {
         while (true) {
             System.out.println("Available Commands : " + IO.Yellow +"\n \t -Get Menu" + "\n \t -Add Order" + IO.Magenta + "Product0 Product1 ..." + IO.Yellow + "\n \t Back" + IO.Reset);
             input = reader.nextLine();
-            switch (input.substring(0, 9)) {
-                case "Get Menu" :
-                    getMenu();
-                    break;
-                case "Add Order" :
-                    addOrder(input);
-                    break;
-                case "Back" :
-                    return;
-                default :
-                    System.out.println(IO.Red + "Invalid Command !");
-                    Handle();
+            int length = input.length();
+            if (input.equals("Get Menu")) {
+                getMenu();
+            }
+            else if (length >= 9 && input.substring(0, 9).equals("Add Order")) {
+                addOrder(input);
+            }
+            else if (input.equals("Back")) {
+                return;
+            }
+            else {
+                IO.printError("Invalid Command !");
             }
         }
     }
@@ -62,7 +62,7 @@ public abstract class Store {
             queue.add(order);
         }
         else {
-            System.out.println(IO.Yellow + "Uh Uh Unfortunately This Order Is Not Available Right Now :(" + IO.Reset);
+            System.out.println(IO.Yellow + "Unfortunately This Order Is Not Available Right Now :(" + IO.Reset);
         }
     }
 }

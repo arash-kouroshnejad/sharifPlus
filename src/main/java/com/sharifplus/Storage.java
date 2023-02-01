@@ -99,65 +99,87 @@ public class Storage {
     public void handle() {
         String input;
         while (true) {
+            System.out.println("Available Commands : \n" + IO.Yellow
+                    + "\t -List Pending \t -List All\n"
+                    + "\t -Query Ware House \t -Update All\n"
+                    + "\t -Update product1 Product2 ... change1 change2 ... (must be typed with +-)\n"
+                    + "\t -Prepare Order OrderID \t -Cancel Order OrderID\n" 
+                    + "\t -Chceck Order OrderID \t -Back");
             input = reader.nextLine();
-            if (input.substring(0, 12).equals("List Pending")) {
+            int length = input.length();
+            if (length >= 12 && input.substring(0, 12).equals("List Pending")) {
                 Order.list(false);
-            } else if (input.substring(0, 8).equals("List All")) {
+            } else if (length >= 8 && input.substring(0, 8).equals("List All")) {
                 Order.list(true);
-            } else if (input.substring(0, 16).equals("Query Ware House")) {
+            } else if (length >= 16 && input.substring(0, 16).equals("Query Ware House")) {
                 queryWareHouse();
-            } else if (input.substring(0, 13).equals("Prepare Order")) {
+            } else if (length >= 16 && input.substring(0, 13).equals("Prepare Order")) {
                 Order tmp;
                 if ((tmp = getOrder(Integer.parseInt(input.split(" ")[2]))) != null) {
-                    if (isAvailable(tmp)) {
+                    if (!tmp.isComplete() && isAvailable(tmp)) {
                         allocate(tmp);
                         IO.PrintCheckMark();
                         System.out.println(
                                 IO.Green + "Order No:" + IO.Blue + tmp.ID + IO.Green + "Has Been Served" + IO.Reset);
+                        tmp.Terminate();
+                    } else if (tmp.isComplete()) {
+                        System.out.println(IO.Yellow + "Order Has Been Served Already" + IO.Reset);
                     } else {
-                        System.out.println(IO.Red + "Uh Uh unavailable :(" + IO.Reset);
+                        IO.printError("Uh Uh unavailable :(");
                     }
                 } else {
-                    System.out.println(IO.Red + "Invalid Order Id" + IO.Reset);
+                    IO.printError("Invalid Order Id");
                 }
-            } else if (input.substring(0, 10).equals("Update All")) {
+            } else if (length >= 10 && input.substring(0, 10).equals("Update All")) {
                 try {
                     updateAll(Integer.parseInt(input.split(" ")[2]));
-                } catch (NumberFormatException e) {
-                    System.out.println(IO.Red + "Invalid Input !" + IO.Reset);
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    IO.printError("Invalid Input !");
                 }
-            } else if (input.substring(0, 7).equals("Update ") && !input.substring(7, 10).equals("All")) {
+            } else if (length >= 10 && input.substring(0, 7).equals("Update ")
+                    && !input.substring(7, 10).equals("All")) {
                 try {
                     int i = 11;
-                    while (!IO.isDigit(input.charAt(i))) {
+                    while (i < length && !IO.isDigit(input.charAt(i))) {
                         i++;
                     }
                     update(input.substring(11, i - 1), input.substring(i - 1));
-                } catch (NumberFormatException e) {
-                    System.out.println(IO.Red + "Invalid Input !" + IO.Reset);
+                } catch (NumberFormatException | IndexOutOfBoundsException a) {
+                    IO.printError("Invalid Input !");
                 }
-            } else if (input.equals("History")) {
-
-            } else if (input.substring(0, 5).equals("Check")) {
+            } else if (input.equals("Cancel")) {
+                try {
+                    int orderNo = Integer.parseInt(input.substring(13));
+                    Order order = getOrder(orderNo);
+                    if (order == null) {
+                        IO.printError("Invalid Order Id !");
+                    } else if (order.isComplete()) {
+                        IO.printError("Order Has Been Served !");
+                    } else {
+                        order.Terminate();
+                    }
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    IO.printError("Invalid Command !");
+                }
+            } else if (length >= 5 && input.substring(0, 5).equals("Check")) {
                 try {
                     int orderNo = Integer.parseInt(input.substring(12));
                     Order ordr = getOrder(orderNo);
                     if (ordr == null) {
                         continue;
                     } else if (isAvailable(ordr)) {
-                        System.out.println(IO.Green + "Order No :" + IO.Cyan + orderNo + "Is Available" + IO.Reset);
+                        System.out.println(
+                                IO.Green + "Order No :" + IO.Cyan + orderNo + IO.Green + "Is Available" + IO.Reset);
                     } else {
-                        System.out.println(IO.Red + "Uh Uh unavailable :(" + IO.Reset);
+                        IO.printError("Uh Uh unavailable :(");
                     }
-                } catch (NumberFormatException e) {
-                    System.out.println(IO.Red + "Invalid Input !" + IO.Reset);
+                } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                    IO.printError("Invalid Input !");
                 }
-            }
-            else if (input.equals("Back")) {
+            } else if (input.equals("Back")) {
                 return;
-            }
-            else {
-                System.out.println(IO.Red + "Invalid Command !" +IO.Reset);
+            } else {
+                IO.printError("Invalid Command !");
             }
         }
     }

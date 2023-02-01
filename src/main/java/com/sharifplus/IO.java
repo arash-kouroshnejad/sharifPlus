@@ -13,6 +13,7 @@ public class IO {
     Cafe cafe = App.cafe;
     Boolean isLogged = User.isLogged;
     User usr = User.currentUsr;
+    Storage storage = App.storage;
 
     public IO() throws NoSuchAlgorithmException {
         while (true) {
@@ -54,7 +55,8 @@ public class IO {
                     input = reader.nextLine();
                     switch (input) {
                         case "Storage":
-
+                            storage.handle();
+                            break;
                         case "Log Out":
                             User.logOut();
                             break;
@@ -81,6 +83,10 @@ public class IO {
             return true;
         }
         return false;
+    }
+
+    public static void printError(String errMsg) {
+        System.out.println(IO.Red + errMsg + IO.Reset);
     }
 
     public static final String Black = "\u001b[30m";
