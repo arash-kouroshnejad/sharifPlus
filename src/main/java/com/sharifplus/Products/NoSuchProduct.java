@@ -1,4 +1,6 @@
-package com.sharifplus;
+package com.sharifplus.Products;
+
+import com.sharifplus.IO;
 
 public class NoSuchProduct extends Exception{
     public NoSuchProduct() {

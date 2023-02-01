@@ -1,6 +1,7 @@
 package com.sharifplus;
 
 import com.sharifplus.Authentication.User;
+import com.sharifplus.Products.NoSuchProduct;
 import com.sharifplus.Products.Product;
 import com.sharifplus.Products.Appetizer.*;
 import com.sharifplus.Products.Dessert.*;
@@ -14,8 +15,8 @@ public class Order {
     public final LinkedList<Product> products;
     private boolean isComplete = false;
 
-    public Order(long ID, User usr, String order) throws NoSuchProduct {
-        this.ID = ID;
+    public Order(User usr, String order) throws NoSuchProduct {
+        this.ID = (long) Math.floor(Math.random() * Math.pow(10, 5));
         this.usr = usr;
         products = new LinkedList<>();
         String[] parsed = order.split(" ");

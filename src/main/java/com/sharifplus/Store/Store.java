@@ -44,7 +44,7 @@ public abstract class Store {
         User usr = User.currentUsr;
         Order order;
         try {
-            order = new Order(usr.userId, usr, input);
+            order = new Order(usr, input);
         }
         catch (NoSuchProduct e) {
             IO.printError("No Such Product !");

@@ -17,7 +17,7 @@ public class IO {
         while (true) {
             if (!User.isLogged()) {
                 System.out.println(
-                        "Available Commands : \n" + IO.Yellow + "\t -Create Account\n" + "\t -Log In" + IO.Reset);
+                        "Available Commands : \n" + IO.Yellow + "\t -Create Account\n" + "\t -Log In\n" + "\t -Exit" + IO.Reset);
                 input = reader.nextLine();
                 switch (input) {
                     case "Create Account":
@@ -26,6 +26,8 @@ public class IO {
                     case "Log In":
                         User.logIn();
                         break;
+                    case "Exit" :
+                        System.exit(0);
                     default:
                         printError("Invalid Command !");
                 }
@@ -33,7 +35,7 @@ public class IO {
                 User usr = User.currentUsr;
                 if (usr.isAdmin || usr.isClient) {
                     System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n"
-                            + IO.Red + "\t -Log Out\n" + "\t -Escalate Privilages\n" + IO.Reset);
+                            + IO.Red + "\t -Log Out\n" + "\t -Escalate Privilages\n" + "\t -Exit" + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {
                         case "Log Out":
@@ -48,11 +50,13 @@ public class IO {
                         case "Escalate Privilages":
                             usr.setPrivilages();
                             break;
+                        case "Exit" :
+                            System.exit(0);
                         default:
                             printError("Invalid Command !");
                     }
                 } else if (usr.isEmployee) {
-                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red + "\t -Log Out"
+                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red + "\t -Log Out\n" + "\t -Exit"
                             + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {
@@ -62,6 +66,8 @@ public class IO {
                         case "Log Out":
                             User.logOut();
                             break;
+                        case "Exit" :
+                            System.exit(0);
                         default:
                             printError("Invalid Command !");
                     }

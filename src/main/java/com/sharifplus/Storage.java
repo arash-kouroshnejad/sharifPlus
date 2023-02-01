@@ -33,15 +33,11 @@ public class Storage {
         }
         int[] positions = new int[parsedProducts.length];
         int[] changes = new int[parsedChange.length];
+        outer: 
         for (int i = 0; i < parsedChange.length; i++) {
-            try {
-                changes[i] = Integer.parseInt(parsedChange[i]);
-            } catch (NumberFormatException e) {
-                System.out.println(IO.Red + " Invalid Number ! (Must Be An Integer" + IO.Reset);
-                return;
-            }
-            outer: for (int j = 0; j < left.length; j++) {
-                if (ProductsList.MATERIALS[i].equals(parsedProducts[i])) {
+            changes[i] = Integer.parseInt(parsedChange[i]);
+            for (int j = 0; j < left.length; j++) {
+                if (ProductsList.MATERIALS[j].equals(parsedProducts[i])) {
                     positions[i] = j;
                     continue outer;
                 }
@@ -56,6 +52,9 @@ public class Storage {
     }
 
     public boolean isAvailable(Order order) {
+        if (order.isComplete()) {
+            IO.printError("Order Has Been Served Already !!");
+        }
         int size = order.products.size();
         int[] total = new int[left.length];
         for (int i = 0; i < size; i++) {
@@ -140,15 +139,15 @@ public class Storage {
             } else if (length >= 10 && input.substring(0, 7).equals("Update ")
                     && !input.substring(7, 10).equals("All")) {
                 try {
-                    int i = 11;
+                    int i = 7;
                     while (i < length && !IO.isDigit(input.charAt(i))) {
                         i++;
                     }
-                    update(input.substring(11, i - 1), input.substring(i - 1));
+                    update(input.substring(7, i - 1), input.substring(i).strip());
                 } catch (NumberFormatException | IndexOutOfBoundsException a) {
-                    IO.printError("Invalid Input !");
+                    IO.printError("Invalid Input !!!");
                 }
-            } else if (input.substring(0, 12).equals("Cancel Order")) {
+            } else if (length >= 12 && input.substring(0, 12).equals("Cancel Order")) {
                 try {
                     int orderNo = Integer.parseInt(input.substring(13));
                     Order order = getOrder(orderNo);
