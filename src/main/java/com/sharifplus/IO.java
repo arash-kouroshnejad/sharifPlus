@@ -33,7 +33,7 @@ public class IO {
                 User usr = User.currentUsr;
                 if (usr.isAdmin || usr.isClient) {
                     System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n"
-                            + IO.Red + "\t -Log Out" + IO.Reset);
+                            + IO.Red + "\t -Log Out\n" + "\t -Escalate Privilages\n" + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {
                         case "Log Out":
@@ -45,11 +45,14 @@ public class IO {
                         case "Cafe":
                             cafe.Handle();
                             break;
+                        case "Escalate Privilages":
+                            usr.setPrivilages();
+                            break;
                         default:
                             printError("Invalid Command !");
                     }
                 } else if (usr.isEmployee) {
-                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red + "\t-Log Out"
+                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red + "\t -Log Out"
                             + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {

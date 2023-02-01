@@ -6,6 +6,6 @@ public class Coffea extends Product {
     public Coffea() {
         TYPE = "Drink";
         name = "Coffea";
-        ingredients = new int[] { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0};
+        ingredients = new int[] {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0};
     }
 }

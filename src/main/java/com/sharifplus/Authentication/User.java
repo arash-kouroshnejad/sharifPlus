@@ -22,10 +22,7 @@ public abstract class User {
 
     public User(String passwrd, String name) throws java.security.NoSuchAlgorithmException {
         userId = (long) Math.floor(Math.random() * Math.pow(10, 5));
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(passwrd.getBytes());
-        pawrdHsh = md.digest();
-        md.reset();
+        pawrdHsh = hash(passwrd);
         this.name = name;
     }
 
@@ -87,9 +84,7 @@ public abstract class User {
             if (usr.name.equals(name)) {
                 System.out.println("Enter Password : ");
                 String passwrd = getPassword(reader);
-                MessageDigest md = MessageDigest.getInstance("SHA-256");
-                md.update(passwrd.getBytes());
-                if (usr.compareHashes(md.digest())) {
+                if (usr.compareHashes(hash(passwrd))) {
                     System.out.println(IO.Green + "  Logged In As " + IO.Blue + usr.name + IO.Reset);
                     if (usr.isAdmin) {
                         System.out.println("Acoount Mode : " + IO.Magenta + "Admin" + IO.Reset);
@@ -130,5 +125,44 @@ public abstract class User {
 
     public static boolean isLogged() {
         return isLogged;
+    }
+
+    public void setPrivilages() throws NoSuchAlgorithmException {
+        Scanner reader = App.reader;
+        System.out.print("Enter Admin Password : ");
+        User admin = App.admin;
+        String passwrd = getPassword(reader);
+        if (admin.compareHashes(hash(passwrd))) {
+            System.out.print("Enter Access Level " + IO.Magenta + "Admin" + IO.Yellow + " Employee" + IO.Green
+                    + " Client : " + IO.Reset);
+            switch (reader.nextLine()) {
+                case "Admin":
+                    isAdmin = true;
+                    isClient = false;
+                    isEmployee = false;
+                    break;
+                case "Employee":
+                    isAdmin = false;
+                    isClient = false;
+                    isEmployee = true;
+                    break;
+                case "Client":
+                    isAdmin = false;
+                    isClient = true;
+                    isEmployee = false;
+                    break;
+                default:
+                    IO.printError("Invalid Access Level !");
+                    return;
+            }
+        }
+    }
+
+    private static byte[] hash(String input) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(input.getBytes());
+        byte[] output = md.digest();
+        md.reset();
+        return output;
     }
 }

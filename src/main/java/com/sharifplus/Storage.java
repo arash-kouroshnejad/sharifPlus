@@ -9,6 +9,7 @@ public class Storage {
 
     public Storage(int[] input) {
         // POPULATE THE left ARRAY
+        left = input;
     }
 
     public void updateAll(int x) {
@@ -100,11 +101,11 @@ public class Storage {
         String input;
         while (true) {
             System.out.println("Available Commands : \n" + IO.Yellow
-                    + "\t -List Pending \t -List All\n"
+                    + "\t -List Pending \t\t\t\t\t -List All\n"
                     + "\t -Query Ware House \t -Update All change (must be typed with +-)\n"
                     + "\t -Update product1 Product2 ... change1 change2 ... (must be typed with +-)\n"
-                    + "\t -Prepare Order OrderID \t -Cancel Order OrderID\n" 
-                    + "\t -Chceck Order OrderID \t -Back");
+                    + "\t -Prepare Order OrderID \t\t\t -Cancel Order OrderID\n" 
+                    + "\t -Chceck Order OrderID \t\t\t\t\t -Back" + IO.Reset);
             input = reader.nextLine();
             int length = input.length();
             if (length >= 12 && input.substring(0, 12).equals("List Pending")) {
@@ -120,7 +121,7 @@ public class Storage {
                         allocate(tmp);
                         IO.PrintCheckMark();
                         System.out.println(
-                                IO.Green + "Order No:" + IO.Blue + tmp.ID + IO.Green + "Has Been Served" + IO.Reset);
+                                IO.Green + "Order No: " + IO.Blue + tmp.ID + IO.Green + " Has Been Served" + IO.Reset);
                         tmp.Terminate();
                     } else if (tmp.isComplete()) {
                         System.out.println(IO.Yellow + "Order Has Been Served Already" + IO.Reset);
@@ -147,7 +148,7 @@ public class Storage {
                 } catch (NumberFormatException | IndexOutOfBoundsException a) {
                     IO.printError("Invalid Input !");
                 }
-            } else if (input.equals("Cancel")) {
+            } else if (input.substring(0, 12).equals("Cancel Order")) {
                 try {
                     int orderNo = Integer.parseInt(input.substring(13));
                     Order order = getOrder(orderNo);
@@ -157,6 +158,8 @@ public class Storage {
                         IO.printError("Order Has Been Served !");
                     } else {
                         order.Terminate();
+                        IO.PrintCheckMark();
+                        System.out.println(IO.Green + "Order " + IO.Blue + order.ID + IO.Green + "Has Been Cancelled !" + IO.Reset);
                     }
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     IO.printError("Invalid Command !");
@@ -169,7 +172,7 @@ public class Storage {
                         continue;
                     } else if (isAvailable(ordr)) {
                         System.out.println(
-                                IO.Green + "Order No :" + IO.Cyan + orderNo + IO.Green + "Is Available" + IO.Reset);
+                                IO.Green + "Order No :" + IO.Cyan + orderNo + IO.Green + " Is Available" + IO.Reset);
                     } else {
                         IO.printError("Uh Uh unavailable :(");
                     }

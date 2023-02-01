@@ -12,7 +12,7 @@ public class Order {
     public final long ID;
     public final User usr;
     public final LinkedList<Product> products;
-    private boolean isComplete;
+    private boolean isComplete = false;
 
     public Order(long ID, User usr, String order) throws NoSuchProduct {
         this.ID = ID;
@@ -61,14 +61,14 @@ public class Order {
     }
 
     public static void list(boolean all) {
-        LinkedList<Order> queue = new LinkedList<>();
+        LinkedList<Order> queue = App.stack;
         for (Order order : queue) {
-            if (all || order.isComplete()) {
+            if (all || !order.isComplete()) {
                 System.out
-                        .println("Order No: " + IO.Yellow + order.ID + IO.Reset + "Created By User Id : " + IO.Blue
+                        .println("Order No: " + IO.Yellow + order.ID + IO.Reset + " Created By User Id : " + IO.Blue
                                 + order.usr.userId
                                 + ((!all) ? IO.Yellow + " (pending) "
-                                        : ((order.isComplete) ? IO.Green + "Terminated" : IO.Yellow + "Pending"))
+                                        : ((order.isComplete) ? IO.Green + "Terminated" : IO.Yellow + " Pending"))
                                 + IO.Reset);
                 System.out.print("[");
                 for (Product product : order.products) {

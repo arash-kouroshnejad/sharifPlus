@@ -9,14 +9,14 @@ public class Cafe extends Store{
     }
 
     public void getMenu() {
-        String alignment = "|%-40s";
+        String alignment = "|%-35s";
         System.out.format("+--------------------------+-----------------------------+\n");
-        System.out.format("|        " + IO.Magenta + "Desserts" + IO.Reset + "          |            " + IO.Yellow + "Drinks" + IO.Reset + "       |\n");
+        System.out.format("|        " + IO.Magenta + "Drinks" + IO.Reset + "          |            " + IO.Yellow + "Desserts" + IO.Reset + "           |\n");
         System.out.format("+--------------------------+-----------------------------+\n");
-        for (int i = 0; i < 4 ;i++) {
-            System.out.format(alignment,((storage.isAvailable(Order.find(arr[i]))) ? IO.Green : IO.Red) + arr[i] + IO.Reset);
-            if (i < 2) {
-                System.out.format(alignment,((storage.isAvailable(Order.find(arr[i + 4]))) ? IO.Green : IO.Red) + arr[i + 4] + IO.Reset);
+        for (int i = 0; i < 5 ;i++) {
+            System.out.format(alignment,((storage.isAvailable(Order.find(arr[i + 3]))) ? IO.Green : IO.Red) + arr[i + 3] + IO.Reset);
+            if (i < 3) {
+                System.out.format(alignment,((storage.isAvailable(Order.find(arr[i]))) ? IO.Green : IO.Red) + arr[i] + IO.Reset);
             }
             System.out.print("|\n");
         }
