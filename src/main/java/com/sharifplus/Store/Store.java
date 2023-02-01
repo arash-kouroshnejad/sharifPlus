@@ -9,7 +9,6 @@ public abstract class Store {
 
     Storage storage = App.storage;
     LinkedList<Order> queue = App.stack;
-    User usr = User.currentUsr;
     Scanner reader = App.reader;
     public final String Menu;
     String[] arr;
@@ -42,9 +41,17 @@ public abstract class Store {
         }
     }
     public void addOrder(String input) {
-        Order order = new Order(usr.userId, usr, input);
+        User usr = User.currentUsr;
+        Order order;
+        try {
+            order = new Order(usr.userId, usr, input);
+        }
+        catch (NoSuchProduct e) {
+            IO.printError("No Such Product !");
+            return;
+        }
+        outer :
         for (Product product : order.products) {
-            outer :
             for (int i=0;i<arr.length;i++) {
                 if (arr[i].equals(product.name)) {
                     continue outer;
@@ -58,7 +65,6 @@ public abstract class Store {
         if (storage.isAvailable(order)) {
             IO.PrintCheckMark();
             System.out.println(IO.Green + "\t Order Created On " + IO.Yellow + java.time.LocalDateTime.now() + IO.Reset + "\tOrder Id : " + IO.Blue + order.ID + IO.Reset);
-            storage.allocate(order);
             queue.add(order);
         }
         else {

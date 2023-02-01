@@ -23,8 +23,4 @@ public class Resturant extends Store {
         }
         System.out.format("+--------------------------+-----------------------------+\n");
     }
-
-    public void addOrder(String input) {
-
-    }
 }

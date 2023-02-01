@@ -14,14 +14,18 @@ public class Order {
     public final LinkedList<Product> products;
     private boolean isComplete;
 
-    public Order(long ID, User usr, String order) {
+    public Order(long ID, User usr, String order) throws NoSuchProduct {
         this.ID = ID;
         this.usr = usr;
         products = new LinkedList<>();
         String[] parsed = order.split(" ");
+        if (parsed.length == 2) {
+            throw new NoSuchProduct();
+        }
         for (int i = 2; i < parsed.length; i++) {
             if (find(parsed[i]) == null) {
                 System.out.println(IO.Yellow + " Invalid Product Name : " + IO.Red + parsed[i] + IO.Reset);
+                throw new NoSuchProduct();
             }
         }
         for (int i = 2; i < parsed.length; i++) {
