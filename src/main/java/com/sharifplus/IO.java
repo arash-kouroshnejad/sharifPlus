@@ -97,11 +97,11 @@ public class IO {
 
     public static void printError(String errMsg) {
         System.out.println(IO.Red + errMsg + IO.Reset);
-        log(Logging.formatError(errMsg), "../../../../logs/errors.log");
+        log(Logging.formatError(errMsg), "./logs/errors.log");
     }
 
     public static void logInfo(String input) {
-        log(input, "../../../../logs/info.log");
+        log(input, "./logs/info.log");
     }
 
     public static void log(String input, String fileName)  {
