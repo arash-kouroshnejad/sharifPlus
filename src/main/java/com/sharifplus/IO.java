@@ -4,7 +4,7 @@ import java.util.Scanner;
 import com.sharifplus.Store.*;
 import com.sharifplus.Authentication.User;
 
-import java.io.FileWriter;
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
 
 public class IO {
@@ -36,7 +36,7 @@ public class IO {
                 User usr = User.currentUsr;
                 if (usr.isAdmin || usr.isClient) {
                     System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n"
-                            + IO.Red + "\t -Log Out\n" + "\t -Escalate Privilages\n" + "\t -Order History\n" + "\t -Exit" + IO.Reset);
+                            + IO.Red + "\t -Log Out\n" + ((usr.isAdmin) ? "\t -Escalate Privilages\n" : "") + "\t -Order History\n" + "\t -Exit" + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {
                         case "Log Out":
@@ -49,6 +49,10 @@ public class IO {
                             cafe.Handle();
                             break;
                         case "Escalate Privilages":
+                            if (!usr.isAdmin) {
+                                printError("Invalif Command !");
+                                break;
+                            }
                             usr.setPrivilages();
                             break;
                         case "Order History" :
@@ -113,6 +117,23 @@ public class IO {
         catch (Exception e) {
             System.out.println(IO.Red + "Fatal Error Occured During Loggin" + IO.Reset);
             System.exit(1);
+        }
+    }
+
+    public static void getAccountActivity(User usr) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("./logs/info.log"));
+            String line = reader.readLine();
+            while (line != null) {
+                if (line.contains(" User : " + IO.Magenta + usr.name + IO.Reset)) {
+                    System.out.println(line);
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+        }
+        catch (Exception e) {
+            printError("Error Occured During Log Reading");
         }
     }
 
