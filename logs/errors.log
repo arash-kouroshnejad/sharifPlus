@@ -1,1 +1,126 @@
 2023-02-02T13:28:12.208974063 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:35:47.964331 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:37:09.184320 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:37:54.470727 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:40:03.670973 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:41:09.954718 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:43:07.423726 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:43:10.427733 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T13:43:18.461547 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T13:43:26.613941 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:44:43.106535 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T13:44:44.757346 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T13:44:45.551954 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T13:44:48.740459 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T13:44:52.569699 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T13:44:54.889261 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T13:48:51.499162 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T13:49:30.253486 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-02T15:01:17.295618 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T15:01:25.415771 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T15:01:28.213312 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:01:29.609791 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:01:30.264356 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:01:31.988844 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T15:01:34.104621 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T15:01:36.736291 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:01:38.765439 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:01:45.652351 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-02T15:02:31.275667 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:02:36.010595 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:03:58.401312 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T15:04:08.535441 Error : [35mAuth Error:[31m  Invalid Length ! Pick Another : [31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:05:12.602862 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-02T15:05:26.049600 Error : [35mAuth Error:[31m  Invalid Length ! Pick Another : [31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:05:28.727261 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-02T15:05:52.696375 Error : [35mAuth Error:[31m  Invalid Length ! Pick Another : [31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:05:55.825572 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-02T15:06:28.957130 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:07:38.321116 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:08:39.415264 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:08:45.142611 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T15:09:02.093729 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:09:02.661846 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:09:03.103591 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:09:33.215078 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:09:37.861609 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:09:38.386948 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:09:38.764982 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:09:39.080407 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:09:40.163702 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:10:20.383936 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:10:23.469492 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:10:23.742193 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:10:24.347001 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:10:24.671760 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:10:25.072218 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:11:18.567663 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:11:43.555763 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:12:42.963223 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:12:43.167296 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:12:43.372777 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:12:43.531684 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:14:09.619198 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:14:10.922590 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:14:11.241243 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:14:11.516819 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:14:17.674017 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:14:20.133178 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:15:36.068156 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:15:36.781767 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:15:37.221229 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:15:37.556031 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:15:39.641809 Error : UserName Does Not Exist ! Level : [31mFatal[0m
+2023-02-02T15:15:39.642345 Error : UserName Does Not Exist ! Level : [31mFatal[0m
+2023-02-02T15:15:39.642664 Error : UserName Does Not Exist ! Level : [31mFatal[0m
+2023-02-02T15:15:39.643023 Error : UserName Does Not Exist ! Level : [31mFatal[0m
+2023-02-02T15:15:39.643377 Error : UserName Does Not Exist ! Level : [31mFatal[0m
+2023-02-02T15:18:11.730004 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:18:11.888651 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:18:12.038677 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:18:12.173590 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:18:12.312317 Error : [35mAuth Error:[31m  Invalid Length ! Level : [31mFatal[0m
+2023-02-02T15:18:14.623347 Error : Username Does Not Exist ! Level : [31mFatal[0m
+2023-02-02T15:18:19.783812 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:18:23.585606 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:23.739695 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:23.892858 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:24.042383 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:24.182230 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:24.297872 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:29.204731 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-02T15:18:34.439204 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:34.588753 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:34.744025 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:34.884133 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:35.013492 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:18:54.293690 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:18:54.473832 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:18:54.649304 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:18:54.823573 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:18:54.987348 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:18:56.390245 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:18:56.556382 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:18:56.707493 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:01.896762 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:02.061649 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:02.235988 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:02.396160 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:02.546024 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:02.708839 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:02.861967 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:03.010706 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:03.156144 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:03.286160 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:19:06.320867 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T15:19:14.066046 Error : Cancelled Level : [31mFatal[0m
+2023-02-02T15:19:22.472332 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:22.656262 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:22.814179 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:22.969543 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:23.128895 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:24.285537 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-02T15:19:25.628375 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:25.806934 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:25.966910 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:19:26.112966 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m

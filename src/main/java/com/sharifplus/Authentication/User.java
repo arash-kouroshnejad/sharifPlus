@@ -26,7 +26,7 @@ public abstract class User {
         this.name = name;
     }
 
-    public User (String passwrdHsh, String usrName, long ID){
+    public User(String passwrdHsh, String usrName, long ID) {
         this.pawrdHsh = parse(passwrdHsh);
         this.name = usrName;
         this.userId = ID;
@@ -35,47 +35,51 @@ public abstract class User {
 
     public static void createUsr(String accssLevel) throws NoSuchAlgorithmException, InvalidType {
         Scanner reader = App.reader;
-        System.out.print("Enter Username : ");
+        System.out.print("Enter Username : " + IO.Red + "Or Type cancel ");
         String userName = getUsername(reader);
         if (userName.equals("cancel")) {
             throw new InvalidType();
         }
-        System.out.print(IO.Green + "Succesful!\n" + IO.Reset + " Enter Password : ");
+        System.out.print(IO.Green + "Succesful!\n" + IO.Reset + " Enter Password : " + IO.Red + "Or type cancel ");
         String passwrd = getPassword(reader);
+        if (passwrd.equals("cancel")) {
+            throw new InvalidType();
+        }
         System.out.println(IO.Green + "Succesful \n");
         User usr;
         switch (accssLevel) {
-            case "Admin" :
+            case "Admin":
                 usr = new Admin(passwrd, userName);
                 break;
-            case "Employee" :
+            case "Employee":
                 usr = new Employee(passwrd, userName);
                 break;
-            case "Client" :
+            case "Client":
                 usr = new Client(passwrd, userName);
                 break;
-            default :
+            default:
                 IO.printError("Invalid Access Level " + accssLevel);
                 throw new InvalidType();
         }
         allUsers.put(usr.userId, usr);
         IO.PrintCheckMark();
-        System.out.println(IO.Green + "Succesful... User " + IO.Blue + userName + IO.Reset + " Created At "
+        System.out.println(IO.Green + " Succesful... User " + IO.Blue + userName + IO.Reset + " Created At "
                 + java.time.LocalDateTime.now());
-        IO.logInfo("A New Account Has Been Created With Username " +IO.Cyan + userName + IO.Reset);
+        IO.logInfo("A New Account Has Been Created With Username " + IO.Cyan + userName + IO.Reset);
     }
 
     private static String getUsername(Scanner reader) {
         String output = reader.nextLine();
         if (output.length() == 0) {
             IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Does Not Meet Minimum Length! Enter Another : ");
-            getUsername(reader);
+            System.out.print("Or type " + IO.Red + "cancel " + IO.Reset);
+            return getUsername(reader);
         }
         for (User usr : allUsers.values()) {
             if (usr.name.equals(output)) {
                 IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Username Already Exist ! Pick Another : ");
-                System.out.print("Or type " + IO.Red + "cancel" + IO.Reset);
-                getUsername(reader);
+                System.out.print("Or type " + IO.Red + "cancel " + IO.Reset);
+                return getUsername(reader);
             }
         }
         return output;
@@ -85,8 +89,9 @@ public abstract class User {
         Console console = System.console();
         char[] password = console.readPassword();
         if (password.length == 0) {
-            IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Invalid Length ! Pick Another : ");
-            getPassword(reader);
+            IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Invalid Length !" + IO.Red
+                    + "Or Type cancel ");
+            return getPassword(reader);
         }
         String output = "";
         for (int i = 0; i < password.length; i++) {
@@ -95,7 +100,7 @@ public abstract class User {
         return output;
     }
 
-    public static void logIn() throws NoSuchAlgorithmException {
+    public static void logIn() throws NoSuchAlgorithmException, InvalidType {
         Scanner reader = App.reader;
         System.out.print("Enter Username : (or enter " + IO.Red + "cancel" + IO.Reset + " to exit)\n \t");
         String name = reader.nextLine();
@@ -105,11 +110,15 @@ public abstract class User {
         if (name.length() == 0) {
             IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Invalid Length !");
             logIn();
+            return;
         }
         for (User usr : allUsers.values()) {
             if (usr.name.equals(name)) {
-                System.out.println("Enter Password : ");
+                System.out.println("Enter Password Or Type" + IO.Red + " cancel" + IO.Reset + " to quit");
                 String passwrd = getPassword(reader);
+                if (passwrd.equals("cancel")) {
+                    throw new InvalidType();
+                }
                 if (usr.compareHashes(hash(passwrd))) {
                     System.out.println(IO.Green + "  Logged In As " + IO.Blue + usr.name + IO.Reset);
                     if (usr.isAdmin) {
@@ -129,7 +138,9 @@ public abstract class User {
                 }
             }
         }
-        logIn();
+        if (!isLogged) {
+            IO.printError("Username Does Not Exist !");
+        }
     }
 
     public static void logOut() {
@@ -168,19 +179,22 @@ public abstract class User {
                     isAdmin = true;
                     isClient = false;
                     isEmployee = false;
-                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Magenta + "Admin" + IO.Reset);
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Magenta + "Admin"
+                            + IO.Reset);
                     break;
                 case "Employee":
                     isAdmin = false;
                     isClient = false;
                     isEmployee = true;
-                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Yellow + "Employee" + IO.Reset);
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Yellow + "Employee"
+                            + IO.Reset);
                     break;
                 case "Client":
                     isAdmin = false;
                     isClient = true;
                     isEmployee = false;
-                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Green + "Client" + IO.Reset);
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Green + "Client"
+                            + IO.Reset);
                     break;
                 default:
                     IO.printError("Invalid Access Level !");
@@ -216,17 +230,17 @@ public abstract class User {
         input = input.substring(1, input.length() - 1);
         String[] parsed = input.split(",");
         byte[] output = new byte[parsed.length];
-        for (int i=0;i<output.length;i++) {
+        for (int i = 0; i < output.length; i++) {
             output[i] = Byte.parseByte(parsed[i].strip());
         }
         return output;
     }
 
-    private static void dumpBytes(byte[] input) {
-        String output = "{";
-        for (int i=0;i<input.length;i++) {
-            output += input[i] + ((i != input.length - 1) ? "," : "");
-        }
-        System.out.println(output+"}");
-    }
+    // private static void dumpBytes(byte[] input) {
+    // String output = "{";
+    // for (int i=0;i<input.length;i++) {
+    // output += input[i] + ((i != input.length - 1) ? "," : "");
+    // }
+    // System.out.println(output+"}");
+    // }
 }

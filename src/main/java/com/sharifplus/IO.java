@@ -24,10 +24,20 @@ public class IO {
                 input = reader.nextLine();
                 switch (input) {
                     case "Create Account":
-                        User.createUsr("Client");
+                        try {
+                            User.createUsr("Client");
+                        }
+                        catch (Exception e) {
+                            printError("Cancelled");
+                        }
                         break;
                     case "Log In":
-                        User.logIn();
+                        try {
+                            User.logIn();
+                        }
+                        catch (Exception e) {
+                            printError("Cancelled");
+                        }
                         break;
                     case "Exit":
                         return;
