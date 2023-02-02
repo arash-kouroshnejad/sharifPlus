@@ -168,9 +168,12 @@ public abstract class User {
 
     public void setPrivilages() throws NoSuchAlgorithmException {
         Scanner reader = App.reader;
-        System.out.print("Enter Admin Password : ");
+        System.out.print("Enter Admin Password Or Type " + IO.Red + "cancel" + IO.Reset + " To Quit :");
         User admin = App.admin;
         String passwrd = getPassword(reader);
+        if (passwrd.equals("cancel")) {
+            return;
+        }
         if (admin.compareHashes(hash(passwrd))) {
             System.out.print("Enter Access Level " + IO.Magenta + "Admin" + IO.Yellow + " Employee" + IO.Green
                     + " Client : " + IO.Reset);
@@ -200,6 +203,8 @@ public abstract class User {
                     IO.printError("Invalid Access Level !");
                     return;
             }
+        } else {
+            IO.printError("Wrong Password Failed Escalation");
         }
     }
 

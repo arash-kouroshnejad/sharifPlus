@@ -108,7 +108,7 @@ public class Storage {
                     + "\t -List Pending \t\t\t\t\t -List All\n"
                     + "\t -Query Inventory \t -Update All change (must be typed with +-)\n"
                     + "\t -Update product1 Product2 ... change1 change2 ... (must be typed with +-)\n"
-                    + "\t -Prepare Order OrderID \t\t\t -Cancel Order OrderID\n" + IO.Red +"\t Show Activity\n" + IO.Reset
+                    + "\t -Prepare Order OrderID \t\t\t -Cancel Order OrderID\n" + IO.Red +"\t -Show Activity\n" + IO.Reset
                     + "\t -Chceck Order OrderID \t\t\t\t\t -Back" + IO.Reset);
             input = reader.nextLine();
             int length = input.length();

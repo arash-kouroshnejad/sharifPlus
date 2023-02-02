@@ -190,6 +190,7 @@ public class IO {
                 switch (parsed[3]) {
                     case "Admin":
                         usr = new Admin(parsed[2], parsed[1], Long.parseLong(parsed[0]));
+                        App.admin = (Admin) usr;
                         break;
                     case "Employee" :
                         usr = new Employee(parsed[2], parsed[1], Long.parseLong(parsed[0]));

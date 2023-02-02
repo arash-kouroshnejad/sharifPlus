@@ -124,3 +124,14 @@
 2023-02-02T15:19:25.806934 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
 2023-02-02T15:19:25.966910 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
 2023-02-02T15:19:26.112966 Error : [35mAuth Error:[31m  Does Not Meet Minimum Length! Enter Another :  Level : [31mFatal[0m
+2023-02-02T15:21:41.317042 - User : [35mArash[0m Access Level : [35mAdmin[0m Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:22:04.572804 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-02T15:22:15.220871 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-02T15:25:25.141638 - User : [35mArash[0m Access Level : [35mAdmin[0m Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:27:04.026957 - User : [35mArash[0m Access Level : [35mAdmin[0m Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:30:20.057693 - User : [35mArash[0m Access Level : [35mAdmin[0m Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:30:20.686388 - User : [35mArash[0m Access Level : [35mAdmin[0m Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:30:21.050781 - User : [35mArash[0m Access Level : [35mAdmin[0m Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:30:21.331831 - User : [35mArash[0m Access Level : [35mAdmin[0m Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
+2023-02-02T15:31:45.688284 - User : [35mArash[0m Access Level : [35mAdmin[0m Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-02T15:34:11.086257 - User : [35mArash[0m Access Level : [33mEmployee[0m Error : Invalid Command ! Level : [31mFatal[0m
