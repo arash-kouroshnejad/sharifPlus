@@ -2,7 +2,6 @@ package com.sharifplus.Authentication;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 import com.sharifplus.*;
 import java.io.Console;
 import java.util.HashMap;
@@ -27,14 +26,38 @@ public abstract class User {
         this.name = name;
     }
 
-    public static void createUsr() throws NoSuchAlgorithmException {
+    public User (String passwrdHsh, String usrName, long ID){
+        this.pawrdHsh = parse(passwrdHsh);
+        this.name = usrName;
+        this.userId = ID;
+        allUsers.put(ID, this);
+    }
+
+    public static void createUsr(String accssLevel) throws NoSuchAlgorithmException, InvalidType {
         Scanner reader = App.reader;
         System.out.print("Enter Username : ");
         String userName = getUsername(reader);
+        if (userName.equals("cancel")) {
+            throw new InvalidType();
+        }
         System.out.print(IO.Green + "Succesful!\n" + IO.Reset + " Enter Password : ");
         String passwrd = getPassword(reader);
         System.out.println(IO.Green + "Succesful \n");
-        User usr = new Client(passwrd, userName);
+        User usr;
+        switch (accssLevel) {
+            case "Admin" :
+                usr = new Admin(passwrd, userName);
+                break;
+            case "Employee" :
+                usr = new Employee(passwrd, userName);
+                break;
+            case "Client" :
+                usr = new Client(passwrd, userName);
+                break;
+            default :
+                IO.printError("Invalid Access Level " + accssLevel);
+                throw new InvalidType();
+        }
         allUsers.put(usr.userId, usr);
         IO.PrintCheckMark();
         System.out.println(IO.Green + "Succesful... User " + IO.Blue + userName + IO.Reset + " Created At "
@@ -51,6 +74,7 @@ public abstract class User {
         for (User usr : allUsers.values()) {
             if (usr.name.equals(output)) {
                 IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Username Already Exist ! Pick Another : ");
+                System.out.print("Or type " + IO.Red + "cancel" + IO.Reset);
                 getUsername(reader);
             }
         }
@@ -186,5 +210,23 @@ public abstract class User {
         } else {
             return IO.Green + "Client" + IO.Reset;
         }
+    }
+
+    private static byte[] parse(String input) {
+        input = input.substring(1, input.length() - 1);
+        String[] parsed = input.split(",");
+        byte[] output = new byte[parsed.length];
+        for (int i=0;i<output.length;i++) {
+            output[i] = Byte.parseByte(parsed[i].strip());
+        }
+        return output;
+    }
+
+    private static void dumpBytes(byte[] input) {
+        String output = "{";
+        for (int i=0;i<input.length;i++) {
+            output += input[i] + ((i != input.length - 1) ? "," : "");
+        }
+        System.out.println(output+"}");
     }
 }

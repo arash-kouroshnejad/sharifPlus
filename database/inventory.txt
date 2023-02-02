@@ -1,0 +1,16 @@
+Flour : 2
+Cheese : 3
+Meat : 4
+Bread : 5
+Vegetable : 6
+Chicken : 7
+Potato : 8
+Coffee-Beans : 9
+Tea : 10
+Chocolate : 11
+Soda : 12
+Icecream : 13
+Egg : 14
+Vanilla : 15
+Water : 16
+Sugar : 17

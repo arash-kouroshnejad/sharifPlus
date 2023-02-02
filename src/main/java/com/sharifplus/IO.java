@@ -2,14 +2,15 @@ package com.sharifplus;
 
 import java.util.Scanner;
 import com.sharifplus.Store.*;
-import com.sharifplus.Authentication.User;
+import com.sharifplus.Authentication.*;
+import com.sharifplus.Products.ProductsList;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 
 public class IO {
 
-    public static void handle() throws NoSuchAlgorithmException {
+    public static void handle() throws NoSuchAlgorithmException, InvalidType {
         Scanner reader = App.reader;
         String input;
         Resturant resturant = App.resturant;
@@ -18,17 +19,18 @@ public class IO {
         while (true) {
             if (!User.isLogged()) {
                 System.out.println(
-                        "Available Commands : \n" + IO.Yellow + "\t -Create Account\n" + "\t -Log In\n" + "\t -Exit" + IO.Reset);
+                        "Available Commands : \n" + IO.Yellow + "\t -Create Account\n" + "\t -Log In\n" + "\t -Exit"
+                                + IO.Reset);
                 input = reader.nextLine();
                 switch (input) {
                     case "Create Account":
-                        User.createUsr();
+                        User.createUsr("Client");
                         break;
                     case "Log In":
                         User.logIn();
                         break;
-                    case "Exit" :
-                        System.exit(0);
+                    case "Exit":
+                        return;
                     default:
                         printError("Invalid Command !");
                 }
@@ -36,7 +38,8 @@ public class IO {
                 User usr = User.currentUsr;
                 if (usr.isAdmin || usr.isClient) {
                     System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Resturant\n" + "\t -Cafe\n"
-                            + IO.Red + "\t -Log Out\n" + ((usr.isAdmin) ? "\t -Escalate Privilages\n" : "") + "\t -Order History\n" + "\t -Exit" + IO.Reset);
+                            + IO.Red + "\t -Log Out\n" + ((usr.isAdmin) ? "\t -Escalate Privilages\n" : "")
+                            + "\t -Order History\n" + "\t -Exit" + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {
                         case "Log Out":
@@ -55,16 +58,17 @@ public class IO {
                             }
                             usr.setPrivilages();
                             break;
-                        case "Order History" :
+                        case "Order History":
                             usr.printOrderHistory();
                             break;
-                        case "Exit" :
-                            System.exit(0);
+                        case "Exit":
+                            return;
                         default:
                             printError("Invalid Command !");
                     }
                 } else if (usr.isEmployee) {
-                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red + "\t -Log Out\n" + "\t -Exit"
+                    System.out.println("\tAvailable Commands : \n" + IO.Yellow + "\t -Storage\n" + IO.Red
+                            + "\t -Log Out\n" + "\t -Exit"
                             + IO.Reset);
                     input = reader.nextLine();
                     switch (input) {
@@ -74,8 +78,8 @@ public class IO {
                         case "Log Out":
                             User.logOut();
                             break;
-                        case "Exit" :
-                            System.exit(0);
+                        case "Exit":
+                            return;
                         default:
                             printError("Invalid Command !");
                     }
@@ -108,13 +112,12 @@ public class IO {
         log(Logging.foramtInfo(input), "./logs/info.log");
     }
 
-    public static void log(String input, String fileName)  {
+    public static void log(String input, String fileName) {
         try {
             FileWriter writer = new FileWriter(fileName, true);
             writer.write(input);
             writer.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(IO.Red + "Fatal Error Occured During Loggin" + IO.Reset);
             System.exit(1);
         }
@@ -131,12 +134,76 @@ public class IO {
                 line = reader.readLine();
             }
             reader.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             printError("Error Occured During Log Reading");
         }
     }
 
+    public static int[] getInventory() {
+        int[] inventory = new int[ProductsList.MATERIALS.length];
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("./database/inventory.txt"));
+            String line = reader.readLine();
+            String[] parsed;
+            while (line != null) {
+                parsed = line.split(" ");
+                if (parsed.length < 3) {
+                    printError(" Invalid Inventory Entry " + line);
+                    System.exit(1);
+                }
+                for (int j = 0; j < inventory.length; j++) {
+                    if (parsed[0].equals(ProductsList.MATERIALS[j])) {
+                        inventory[j] = Integer.parseInt(parsed[2]); // Meat : 5
+                    }
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (Exception e) {
+            printError("Inventory File Could Not Be Read Properly !");
+            System.exit(1);
+        }
+        return inventory;
+    }
+
+    public static void getUsers() { // userId usrName passwrdHsh accssLvl
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("./database/accounts.txt"));
+            String line = reader.readLine();
+            User usr = null;
+            while (line != null) {
+                String[] parsed = line.split(" ");
+                if (parsed.length < 4) {
+                    printError("Invalid Userlist Entry " + line);
+                    System.exit(1);
+                }
+                switch (parsed[3]) {
+                    case "Admin":
+                        usr = new Admin(parsed[2], parsed[1], Long.parseLong(parsed[0]));
+                        break;
+                    case "Employee" :
+                        usr = new Employee(parsed[2], parsed[1], Long.parseLong(parsed[0]));
+                        break;
+                    case "Client" :
+                        usr = new Client(parsed[2], parsed[1], Long.parseLong(parsed[0]));
+                        break;
+                    default :
+                        printError("Invalid Type");
+                }
+                if (usr == null) {
+                    printError(" Error ");
+                }
+                else {
+                    logInfo(" User " + parsed[1] + " Inported From File" + " Access Level : " + usr.getPrivilage());
+                }
+                line = reader.readLine();
+            }
+            reader.close();
+        } catch (Exception e) {
+            printError(" User Accounts Could Not Be Read Properly !");
+            System.exit(1);
+        }
+    }
 
     public static final String Black = "\u001b[30m";
     public static final String Red = "\u001b[31m";

@@ -5,4 +5,8 @@ public class Admin extends User {
         super(passwrd, name);
         isAdmin = true;
     }
+    public Admin(String passwrdHsh, String name, Long id){
+        super(passwrdHsh, name, id);
+        isAdmin = true;
+    }
 }

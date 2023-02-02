@@ -5,4 +5,8 @@ public class Client extends User {
         super(passwrd, name);
         isClient = true;
     }
+    public Client(String hash, String name, Long id) {
+        super(hash, name, id);
+        isClient = true;
+    }
 }

@@ -5,4 +5,8 @@ public class Employee extends User{
         super(passwrd, name);
         isEmployee = true;
     }
+    public Employee(String hash, String name, long id) {
+        super(hash, name, id);
+        isEmployee = true;
+    }
 }
