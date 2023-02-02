@@ -101,7 +101,7 @@ public class IO {
     }
 
     public static void logInfo(String input) {
-        log(input, "./logs/info.log");
+        log(Logging.foramtInfo(input), "./logs/info.log");
     }
 
     public static void log(String input, String fileName)  {
@@ -115,6 +115,7 @@ public class IO {
             System.exit(1);
         }
     }
+
 
     public static final String Black = "\u001b[30m";
     public static final String Red = "\u001b[31m";

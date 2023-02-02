@@ -50,7 +50,7 @@ public class Storage {
         for (int i = 0; i < parsedChange.length; i++) {
             left[positions[i]] += changes[i];
         }
-        IO.logInfo("Products " + IO.Cyan + products + IO.Reset + "Were Updated By : " + IO.Yellow + change + IO.Reset + "By : ");
+        IO.logInfo("Products " + IO.Cyan + products + IO.Reset + " Were Updated By : " + IO.Yellow + change + IO.Reset + " By : ");
     }
 
     public boolean isAvailable(Order order) {
@@ -162,7 +162,8 @@ public class Storage {
                     } else {
                         order.Terminate();
                         IO.PrintCheckMark();
-                        System.out.println(IO.Green + "Order " + IO.Blue + order.ID + IO.Green + "Has Been Cancelled !" + IO.Reset);
+                        System.out.println(IO.Green + " Order " + IO.Blue + order.ID + IO.Green + " Has Been Cancelled !" + IO.Reset);
+                        IO.logInfo(IO.Green + " Order " + IO.Blue + order.ID + IO.Green + " Has Been Cancelled !" + IO.Reset + " By : ");
                     }
                 } catch (NumberFormatException | IndexOutOfBoundsException e) {
                     IO.printError("Invalid Command !");

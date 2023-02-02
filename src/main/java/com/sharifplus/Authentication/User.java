@@ -39,7 +39,7 @@ public abstract class User {
         IO.PrintCheckMark();
         System.out.println(IO.Green + "Succesful... User " + IO.Blue + userName + IO.Reset + " Created At "
                 + java.time.LocalDateTime.now());
-        IO.logInfo("A New Account Has Been Created");
+        IO.logInfo("A New Account Has Been Created With Username " +IO.Cyan + userName + IO.Reset);
     }
 
     private static String getUsername(Scanner reader) {
@@ -88,7 +88,6 @@ public abstract class User {
                 String passwrd = getPassword(reader);
                 if (usr.compareHashes(hash(passwrd))) {
                     System.out.println(IO.Green + "  Logged In As " + IO.Blue + usr.name + IO.Reset);
-                    IO.logInfo("Login By : ");
                     if (usr.isAdmin) {
                         System.out.println("Acoount Mode : " + usr.getPrivilage());
                     } else if (usr.isClient) {
@@ -98,6 +97,7 @@ public abstract class User {
                     }
                     isLogged = true;
                     currentUsr = usr;
+                    IO.logInfo("Login By : ");
                     return;
                 } else {
                     IO.printError(IO.Magenta + "Auth Error:" + IO.Red + "  Wrong Passwrord !");
@@ -144,19 +144,19 @@ public abstract class User {
                     isAdmin = true;
                     isClient = false;
                     isEmployee = false;
-                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Magenta + "Admin");
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Magenta + "Admin" + IO.Reset);
                     break;
                 case "Employee":
                     isAdmin = false;
                     isClient = false;
                     isEmployee = true;
-                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Yellow + "Employee");
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Yellow + "Employee" + IO.Reset);
                     break;
                 case "Client":
                     isAdmin = false;
                     isClient = true;
                     isEmployee = false;
-                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Green + "Client");
+                    IO.logInfo("User " + IO.Cyan + name + IO.Reset + " Has Been Escalated To " + IO.Green + "Client" + IO.Reset);
                     break;
                 default:
                     IO.printError("Invalid Access Level !");
