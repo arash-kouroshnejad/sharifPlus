@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import javax.swing.plaf.basic.BasicTreeUI.ComponentHandler;
+
 public abstract class User {
     static HashMap<Long, User> allUsers = App.users;
     private static boolean isLogged = false;
@@ -49,7 +51,19 @@ public abstract class User {
         User usr;
         switch (accssLevel) {
             case "Admin":
-                usr = new Admin(passwrd, userName);
+                System.out.print("Enter Admin Password Or Type " + IO.Red + "cancel" + IO.Reset + " To Quit :");
+                User admin = App.admin;
+                String adminPass = getPassword(reader);
+                if (passwrd.equals("cancel")) {
+                    throw new InvalidType();
+                }
+                if (admin.compareHashes(hash(adminPass))) {
+                    usr = new Admin(passwrd, userName);
+                }
+                else {
+                    IO.printError(" Failed User Escalation ");
+                    throw new InvalidType();
+                }
                 break;
             case "Employee":
                 usr = new Employee(passwrd, userName);
@@ -204,7 +218,7 @@ public abstract class User {
                     return;
             }
         } else {
-            IO.printError("Wrong Password Failed Escalation");
+            IO.printError("Wrong Password ,Failed Escalation");
         }
     }
 

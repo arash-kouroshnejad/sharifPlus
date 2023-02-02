@@ -24,18 +24,26 @@ public class IO {
                 input = reader.nextLine();
                 switch (input) {
                     case "Create Account":
+                        System.out.println("Enter Account Mode " + IO.Magenta + "Admin " + IO.Yellow + "Employee " + IO.Green + "Client" + IO.Reset);
                         try {
-                            User.createUsr("Client");
-                        }
-                        catch (Exception e) {
+                            String type = reader.nextLine();
+                            if (type.equals("Client")) {
+                                User.createUsr("Client");
+                            } else if (type.equals("Employee")) {
+                                User.createUsr("Employee");
+                            } else if (type.equals("Admin")) {
+                                User.createUsr("Admin");
+                            } else {
+                                printError("Invalid User Type");
+                            }
+                        } catch (Exception e) {
                             printError("Cancelled");
                         }
                         break;
                     case "Log In":
                         try {
                             User.logIn();
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
                             printError("Cancelled");
                         }
                         break;
@@ -192,19 +200,18 @@ public class IO {
                         usr = new Admin(parsed[2], parsed[1], Long.parseLong(parsed[0]));
                         App.admin = (Admin) usr;
                         break;
-                    case "Employee" :
+                    case "Employee":
                         usr = new Employee(parsed[2], parsed[1], Long.parseLong(parsed[0]));
                         break;
-                    case "Client" :
+                    case "Client":
                         usr = new Client(parsed[2], parsed[1], Long.parseLong(parsed[0]));
                         break;
-                    default :
+                    default:
                         printError("Invalid Type");
                 }
                 if (usr == null) {
                     printError(" Error ");
-                }
-                else {
+                } else {
                     logInfo(" User " + parsed[1] + " Inported From File" + " Access Level : " + usr.getPrivilage());
                 }
                 line = reader.readLine();
