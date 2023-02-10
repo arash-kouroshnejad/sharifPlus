@@ -4,7 +4,7 @@ import java.util.Scanner;
 import com.sharifplus.Store.*;
 import com.sharifplus.Authentication.*;
 import com.sharifplus.Products.ProductsList;
-
+import java.util.HashMap;
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 
@@ -136,7 +136,7 @@ public class IO {
             writer.write(input);
             writer.close();
         } catch (Exception e) {
-            System.out.println(IO.Red + "Fatal Error Occured During Loggin" + IO.Reset);
+            System.out.println(IO.Red + "Fatal Error Occurred During Loggin" + IO.Reset);
             System.exit(1);
         }
     }
@@ -212,7 +212,7 @@ public class IO {
                 if (usr == null) {
                     printError(" Error ");
                 } else {
-                    logInfo(" User " + parsed[1] + " Inported From File" + " Access Level : " + usr.getPrivilage());
+                    logInfo(" User " + parsed[1] + " Inported From File" + " Access Level : " + usr.getPrivilage(true));
                 }
                 line = reader.readLine();
             }
@@ -222,6 +222,30 @@ public class IO {
             System.exit(1);
         }
     }
+
+    public static void saveState() {
+        try {
+            Storage storage = App.storage;
+            HashMap<Long, User> usrs = App.users;
+            BufferedWriter writer = new BufferedWriter(new FileWriter("./database/inventory.txt"));
+            for (int i = 0; i < ProductsList.MATERIALS.length ;i++) {
+                writer.write(ProductsList.MATERIALS[i] + " : " + storage.left[i] + System.lineSeparator());
+            }
+            writer.close();
+            writer = new BufferedWriter(new FileWriter("./database/accounts.txt"));
+            User usr;
+            for (Long id : usrs.keySet()) {
+                usr = usrs.get(id);
+                writer.write(id + " " + usr.name + " " + usr.dumpBytes() + " " + usr.getPrivilage(false) + System.lineSeparator());
+            }
+            writer.close();
+        }
+        catch (Exception e) {
+            printError("Fatal Error Occurred During Disk Write");
+            System.exit(1);
+        }
+    }
+
 
     public static final String Black = "\u001b[30m";
     public static final String Red = "\u001b[31m";

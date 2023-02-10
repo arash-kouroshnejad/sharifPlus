@@ -50,6 +50,10 @@ public class Storage {
         }
         for (int i = 0; i < parsedChange.length; i++) {
             left[positions[i]] += changes[i];
+            if (left[positions[i]] < 0) {
+                IO.printError("Negative Left From " + IO.Yellow + ProductsList.MATERIALS[positions[i]] + IO.Red);
+                left[positions[i]] -= changes[i];
+            }
         }
         IO.logInfo("Products " + IO.Cyan + products + IO.Reset + " Were Updated By : " + IO.Yellow + change + IO.Reset + " By : ");
     }

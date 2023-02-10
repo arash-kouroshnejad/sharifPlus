@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-
 public abstract class User {
     static HashMap<Long, User> allUsers = App.users;
     private static boolean isLogged = false;
@@ -58,8 +57,7 @@ public abstract class User {
                 }
                 if (admin.compareHashes(hash(adminPass))) {
                     usr = new Admin(passwrd, userName);
-                }
-                else {
+                } else {
                     IO.printError(" Failed User Escalation ");
                     throw new InvalidType();
                 }
@@ -135,11 +133,11 @@ public abstract class User {
                 if (usr.compareHashes(hash(passwrd))) {
                     System.out.println(IO.Green + "  Logged In As " + IO.Blue + usr.name + IO.Reset);
                     if (usr.isAdmin) {
-                        System.out.println("Acoount Mode : " + usr.getPrivilage());
+                        System.out.println("Acoount Mode : " + usr.getPrivilage(true));
                     } else if (usr.isClient) {
-                        System.out.println("Account Mode : " + usr.getPrivilage());
+                        System.out.println("Account Mode : " + usr.getPrivilage(true));
                     } else if (usr.isEmployee) {
-                        System.out.println("Account Mode : " + usr.getPrivilage());
+                        System.out.println("Account Mode : " + usr.getPrivilage(true));
                     }
                     isLogged = true;
                     currentUsr = usr;
@@ -234,13 +232,24 @@ public abstract class User {
         IO.logInfo("Purchase Hisotry Generated For : ");
     }
 
-    public String getPrivilage() {
-        if (isAdmin) {
-            return IO.Magenta + "Admin" + IO.Reset;
-        } else if (isEmployee) {
-            return IO.Yellow + "Employee" + IO.Reset;
-        } else {
-            return IO.Green + "Client" + IO.Reset;
+    public String getPrivilage(boolean withColours) {
+        if (withColours) {
+            if (isAdmin) {
+                return IO.Magenta + "Admin" + IO.Reset;
+            } else if (isEmployee) {
+                return IO.Yellow + "Employee" + IO.Reset;
+            } else {
+                return IO.Green + "Client" + IO.Reset;
+            }
+        }
+        else {
+            if (isAdmin) {
+                return "Admin";
+            } else if (isClient) {
+                return "Client";
+            } else {
+                return "Employee";
+            }
         }
     }
 
@@ -254,11 +263,11 @@ public abstract class User {
         return output;
     }
 
-    // private static void dumpBytes(byte[] input) {
-    // String output = "{";
-    // for (int i=0;i<input.length;i++) {
-    // output += input[i] + ((i != input.length - 1) ? "," : "");
-    // }
-    // System.out.println(output+"}");
-    // }
+    public String dumpBytes() {
+        String output = "{";
+        for (int i = 0; i < pawrdHsh.length; i++) {
+            output += pawrdHsh[i] + ((i != pawrdHsh.length - 1) ? "," : "");
+        }
+        return(output + "}");
+    }
 }

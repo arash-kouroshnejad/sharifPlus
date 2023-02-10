@@ -41,3 +41,14 @@
 2023-02-02T16:31:29.773259 Error : [35mAuth Error:[31m  Invalid Length ![31mOr Type cancel  Level : [31mFatal[0m
 2023-02-02T16:31:33.350335 Error :  Failed User Escalation  Level : [31mFatal[0m
 2023-02-02T16:31:33.350934 Error : Cancelled Level : [31mFatal[0m
+2023-02-10T12:45:00.874689 Error : [35mAuth Error:[31m  Username Already Exist ! Pick Another :  Level : [31mFatal[0m
+2023-02-10T12:45:15.515015 Error : Fatal Error Occurred During Disk Write Level : [31mFatal[0m
+2023-02-10T12:46:08.782745 Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-10T12:46:41.024938 Error : Fatal Error Occurred During Disk Write Level : [31mFatal[0m
+2023-02-10T12:50:19.872710666 Error : [35mAuth Error:[31m  Wrong Passwrord ! Level : [31mFatal[0m
+2023-02-10T12:51:49.691432448 Error : Username Does Not Exist ! Level : [31mFatal[0m
+2023-02-10T12:52:26.958415715 - User : [35masqar[0m Access Level : [33mEmployee[0m Error : [0mNegative Left From : [31mFlour Level : [31mFatal[0m
+2023-02-10T12:55:18.199948425 - User : [35masqar[0m Access Level : [33mEmployee[0m Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-10T12:55:22.397566634 - User : [35masqar[0m Access Level : [33mEmployee[0m Error : Invalid Command ! Level : [31mFatal[0m
+2023-02-10T12:56:03.148659139 - User : [35masqar[0m Access Level : [33mEmployee[0m Error :  Invalid Input ! Level : [31mFatal[0m
+2023-02-10T12:56:16.597785111 - User : [35masqar[0m Access Level : [33mEmployee[0m Error : Negative Left From [33mCheese[31m Level : [31mFatal[0m

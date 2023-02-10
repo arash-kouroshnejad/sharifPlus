@@ -19,6 +19,11 @@ public class App
 
     public static void main( String[] args ) throws NoSuchAlgorithmException, InvalidType
     {
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                IO.saveState();
+            }
+        }, "Shutdown-Hook"));
         System.out.println(IO.Green + "Welcome to this goddamed sht hole" + IO.Reset);
         IO.getUsers();
         IO.handle();
